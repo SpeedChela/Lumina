@@ -25,8 +25,8 @@ export default function Home() {
           </div>
           {/* Menú de navegación alineado a la derecha */}
           <ul className="menu">
-            <li><a className="btn">Inicio de Sesion</a></li> {/* Botón de inicio de sesión */}
-            <li><a className="btn">Registrarse</a></li>     {/* Botón de registro */}
+            <li><a className="btn btn-small">Inicio de Sesion</a></li> {/* Botón de inicio de sesión */}
+            <li><a className="btn btn-small">Registrarse</a></li>     {/* Botón de registro */}
           </ul>
         </nav>
       </header>
