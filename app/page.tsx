@@ -73,6 +73,9 @@ export default function Home() {
                 />
                 <h3 className="h3">Anillos</h3>
                 <p>Etiquetas con significado mejoran la accesibilidad y SEO</p>
+                <p>Descubre anillos diseñados para cada momento de tu vida.
+                   Desde estilos minimalistas hasta piezas con piedras que roban miradas,
+                    encuentra el complemento perfecto para expresar tu personalidad.</p>
                 <p><a className="btn">Comprar</a></p>
               </article>
               {/* Tarjeta 2: Pulseras */}
@@ -86,6 +89,9 @@ export default function Home() {
                 />
                 <h3 className="h3">Pulseras</h3>
                 <p>Diseño que se adapta usando unidades relativas y media queries</p>
+                <p>Detalles que marcan la diferencia. Pulseras versátiles y sofisticadas,
+                   ideales para llevar solas o en combinación, creando un estilo auténtico
+                    y lleno de carácter.</p>
                 <p><a className="btn">Comprar</a></p>
               </article>
               {/* Tarjeta 3: Collares */}
@@ -99,6 +105,9 @@ export default function Home() {
                 />
                 <h3 className="h3">Collares</h3>
                 <p>Divide en piezas reutilizables con CSS Modules.</p>
+                <p>Collares únicos que iluminan tu estilo. Desde cadenas delicadas hasta
+                   diseños con brillo impactante, cada pieza está pensada para realzar tu
+                    elegancia y acompañarte en cualquier ocasión</p>
                 <p><a className="btn">Comprar</a></p>
               </article>
             </div>
