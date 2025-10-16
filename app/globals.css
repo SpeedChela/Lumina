@@ -147,6 +147,17 @@ p {
   font-weight: 600; /* Negrita para el texto del botón */
   border: 1px solid transparent; /* Borde transparente para mantener tamaño */
 }
+
+.btnTransparente {
+  display: inline-block; /* Permite aplicar padding y margen */
+  padding: .75rem 1.0rem; /* Espaciado interno */
+  border-radius: 9px; /* Esquinas redondeadas */
+  background: transparent; /* Fondo con color de marca */
+  color: rgb(0, 0, 0); /* Color de texto en el botón */
+  font-weight: 600; /* Negrita para el texto del botón */
+  border: 1px solid transparent; /* Borde transparente para mantener tamaño */
+}
+
 .boton:hover {
   filter: brightness(1.1); /* este Efecto de brillo al pasar el mouse */
 } 
@@ -279,6 +290,6 @@ h3 {
   justify-content: flex-end; /* Redes a la derecha */
 }
 .btn-small {
-  padding: 0.4rem 0.8rem;
-  font-size: 0.95rem;
+  padding: 0.4rem 0.8rem; /* Espaciado interno más pequeño */
+  font-size: 0.60rem; /* Tamaño de fuente más pequeño */
 }
