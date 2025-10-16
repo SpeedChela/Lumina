@@ -21,7 +21,7 @@ export default function Home() {
               height={30} // Alto de la imagen
               style={{ maxWidth: "50px", width: "100%", margin: "0 1rem 0 0", borderRadius: "12px" }} // Estilos en línea
             />
-            <span className="brand">Lumina</span> {/* Nombre de la marca */}
+            <span className="brand"></span> {/* Nombre de la marca */}
           </div>
           {/* Menú de navegación alineado a la derecha */}
           <ul className="menu">
