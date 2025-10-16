@@ -7,9 +7,9 @@
   --background: #eeeeee; /* Color de fondo principal de la página */
   --text: #000000; /* Color del texto principal */
   --muted: #b3ab99; /* Color para elementos atenuados o secundarios */
-  --brand: #f7ee7a; /* Color de marca o acento principal */
+  --brand: #f0d58c; /* Color de marca o acento principal */
   --brand--600: #f7ee7a; /* Variante más intensa del color de marca */
-  --surface: #f7ee7a; /* Color para superficies o elementos destacados */
+  --surface: #fdf5e6; /* Color para superficies o elementos destacados */
   --card: #ffffff; /* Color para tarjetas o bloques */
   --border: #ffffff; /* Color para bordes de elementos */
   --radius: 16px; /* Radio de borde para esquinas redondeadas */
