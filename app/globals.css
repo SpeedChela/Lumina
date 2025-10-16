@@ -1,0 +1,282 @@
+@import "tailwindcss"; /* Importa utilidades de Tailwind CSS para usar clases en el proyecto */
+
+/* =========================
+   VARIABLES GLOBALES
+   ========================= */
+:root {
+  --background: #eeeeee; /* Color de fondo principal de la página */
+  --text: #000000; /* Color del texto principal */
+  --muted: #b3ab99; /* Color para elementos atenuados o secundarios */
+  --brand: #f7ee7a; /* Color de marca o acento principal */
+  --brand--600: #f7ee7a; /* Variante más intensa del color de marca */
+  --surface: #f7ee7a; /* Color para superficies o elementos destacados */
+  --card: #ffffff; /* Color para tarjetas o bloques */
+  --border: #ffffff; /* Color para bordes de elementos */
+  --radius: 16px; /* Radio de borde para esquinas redondeadas */
+  --container: 1100px; /* Ancho máximo del contenedor principal */
+  --font-sans: 'Arial', sans-serif; /* Fuente principal sans-serif */
+  --shadow: 0 10px 30px rgba(245, 198, 68); /* Sombra para elementos elevados */
+  --foreground: #171717; /* Color de primer plano, usado en modo oscuro */
+}
+
+/* =========================
+   BODY Y TIPOGRAFÍA
+   ========================= */
+body {
+  background: var(--background); /* Aplica el color de fondo definido en variables */
+  color: var(--text); /* Aplica el color de texto principal */
+  font-family: var(--font-sans); /* Usa la fuente sans-serif definida */
+  line-height: 1.6; /* Mejora la legibilidad del texto */
+}
+
+/* =========================
+   HEADER Y NAVEGACIÓN
+   ========================= */
+.site-header {
+  position: sticky; /* El header se mantiene visible al hacer scroll */
+  top: 0;
+  z-index: 1000; /* Se asegura que esté por encima de otros elementos */
+  backdrop-filter: blur(8px); /* Aplica desenfoque al fondo del header */
+  background: #ffffff; /* Fondo blanco */
+  border-bottom: 1px solid var(--border); /* Borde inferior */
+}
+
+.nav {
+  display: flex; /* Usa flexbox para distribuir los elementos */
+  align-items: center; /* Centra los elementos verticalmente */
+  justify-content: space-between; /* Espacia los elementos a los extremos */
+  padding: .9rem 0; /* Espaciado vertical */
+}
+
+.nav-flex {
+  display: flex; /* Flexbox para el nav principal */
+  align-items: center; /* Centra verticalmente */
+  justify-content: space-between; /* Logo a la izq, menú a la der */
+  gap: 2rem; /* Espacio entre logo y menú */
+}
+
+.nav-logo {
+  display: flex; /* Logo y texto juntos */
+  align-items: center; /* Centra verticalmente */
+  gap: 0.5rem; /* Espacio entre logo y texto */
+}
+
+.brand {
+  font-weight: 700; /* Negrita */
+  font-size: 1.1rem; /* Tamaño de fuente */
+}
+
+.menu {
+  list-style: none; /* Quita los puntos de la lista */
+  display: flex; /* Flexbox para los ítems del menú */
+  gap: 1rem; /* Espacio entre los ítems */
+  margin-left: 0; /* Elimina margen izquierdo */
+  padding: 0; /* Elimina padding */
+  align-items: center; /* Centra verticalmente */
+}
+
+menu a {
+  color: var(--text); /* Color de texto de los enlaces */
+  opacity: 0.9; /* Opacidad para efecto visual */
+}
+
+.menu a:hover {
+  opacity: 1; /* Hace el enlace completamente visible al pasar el mouse */
+}
+
+a:hover {
+  cursor: pointer; /* Cambia el cursor a mano en todos los enlaces */
+}
+
+/* =========================
+   CONTENEDORES Y SECCIONES
+   ========================= */
+.container {
+  width: min(100% - 2rem, var(--container)); /* Ancho máximo definido por variable */
+  margin-inline: auto; /* Centra el contenedor horizontalmente */
+}
+
+.section {
+  padding: 3rem 0; /* Espaciado vertical para secciones */
+}
+
+.section.center {
+  text-align: center; /* Centra el texto */
+}
+
+.section.izquierda {
+  text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.section.derecha {
+  text-align: right; /* Alinea el texto a la derecha */
+}
+
+/* =========================
+   TIPOGRAFÍA
+   ========================= */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 .5rem; /* Margen inferior para separar del contenido */
+  line-height: 1.2; /* Mejora la legibilidad */
+}
+h1 {
+  font-size: 2.5rem; /* Tamaño de fuente grande */
+  font-weight: 700; /* Negrita */
+}
+h2 {
+  font-size: 1.0rem; /* Tamaño de fuente */
+  font-weight: 600; /* Negrita */
+}
+h3 {
+  font-size: 10.0rem; /* Tamaño de fuente (¡revisa si este tamaño es intencional!) */
+  font-weight: 600; /* Negrita */
+}
+p {
+  margin: 0 0 1rem; /* Margen inferior para separar del siguiente elemento */
+}
+
+/* =========================
+   BOTONES
+   ========================= */
+.btn {
+  display: inline-block; /* Permite aplicar padding y margen */
+  padding: .75rem 1.0rem; /* Espaciado interno */
+  border-radius: 9px; /* Esquinas redondeadas */
+  background: var(--brand); /* Fondo con color de marca */
+  color: rgb(0, 0, 0); /* Color de texto en el botón */
+  font-weight: 600; /* Negrita para el texto del botón */
+  border: 1px solid transparent; /* Borde transparente para mantener tamaño */
+}
+
+/* =========================
+   GRID Y TARJETAS
+   ========================= */
+.grid {
+  display: grid; /* Usa CSS Grid */
+  gap: 1rem; /* Espacio entre los elementos de la cuadrícula */
+  grid-template-columns: repeat(12, 1fr); /* 12 columnas responsivas */
+}
+
+.card {
+  background: var(--card); /* Fondo con color de tarjeta */
+  border: 1px solid var(--border); /* Borde con color de variable */
+  border-radius: var(--radius); /* Esquinas redondeadas con variable */
+  padding: 1.2rem; /* Espaciado interno */
+  box-shadow: var(--shadow); /* Sombra para efecto de elevación */
+  text-align: center; /* Centra el texto dentro de la tarjeta */
+}
+
+h3 {
+  font-size: 2.0rem; /* Tamaño de fuente para h3 */
+}
+
+.col-12 {
+  grid-column: span 12; /* Ocupa las 12 columnas de la cuadrícula */
+}
+.col-6 {
+  grid-column: span 6; /* Ocupa 6 de las 12 columnas */
+}
+.col-4 {
+  grid-column: span 4; /* Ocupa 4 de las 12 columnas */
+}
+.col-3 {
+  grid-column: span 3; /* Ocupa 3 de las 12 columnas */
+}
+
+/* =========================
+   RESPONSIVE GRID
+   ========================= */
+@media (max-width: 900px) {
+  .col-md-12 {
+    grid-column: span 12 !important; /* Ocupa todo el ancho en pantallas medianas */
+  }
+  .col-md-6 {
+    grid-column: span 6 !important; /* Ocupa la mitad en pantallas medianas */
+  }
+}
+@media (max-width: 640px) {
+  .col-sm-12 {
+    grid-column: span 12 !important; /* Ocupa todo el ancho en pantallas pequeñas */
+  }
+  .col-sm-6 {
+    grid-column: span 6 !important; /* Ocupa la mitad en pantallas pequeñas */
+  }
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+.site-footer {
+  background: var(--surface); /* Fondo del footer */
+  color: var(--text); /* Color de texto */
+  padding: 2rem 0; /* Espaciado vertical */
+  border-top: 1px solid var(--border); /* Borde superior */
+  text-align: center; /* Centra el texto por defecto */
+  font-size: 1rem; /* Tamaño de fuente */
+}
+.site-footer a {
+  color: var(--text); /* Color de enlaces */
+  text-decoration: underline; /* Subrayado */
+}
+.site-footer a:hover {
+  color: var(--brand--600); /* Color al pasar el mouse */
+}
+
+/* =========================
+   FAQ
+   ========================= */
+.faq-list summary {
+  cursor: pointer; /* Manita al pasar sobre las preguntas */
+}
+
+/* =========================
+   HERO (SECCIÓN PRINCIPAL)
+   ========================= */
+.hero-flex {
+  display: flex; /* Flexbox para alinear imagen y texto */
+  align-items: center; /* Centra verticalmente */
+  gap: 2rem; /* Espacio entre imagen y texto */
+  flex-wrap: wrap; /* Permite que se apilen en pantallas pequeñas */
+}
+.hero-img {
+  flex: 0 0 auto; /* Imagen no crece ni se reduce */
+}
+.hero-text {
+  flex: 1 1 0; /* Texto ocupa el espacio restante */
+  min-width: 250px; /* Ancho mínimo para el texto */
+}
+
+/* =========================
+   FOOTER FLEX (LOGO, MARCA, REDES)
+   ========================= */
+.footer-flex {
+  display: flex; /* Flexbox para el footer */
+  align-items: center; /* Centra verticalmente */
+  justify-content: space-between; /* Espacia logo, marca y redes */
+  gap: 2rem; /* Espacio entre columnas */
+}
+
+.footer-logo,
+.footer-brand,
+.footer-redes {
+  flex: 1 1 0; /* Cada columna puede crecer o reducirse */
+  display: flex; /* Flexbox para centrar contenido */
+  justify-content: center; /* Centra horizontalmente por defecto */
+  align-items: center; /* Centra verticalmente */
+}
+
+.footer-logo {
+  justify-content: flex-start; /* Logo a la izquierda */
+}
+
+.footer-brand {
+  justify-content: center; /* Marca al centro */
+}
+
+.footer-redes {
+  justify-content: flex-end; /* Redes a la derecha */
+}
+.btn-small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.95rem;
+}

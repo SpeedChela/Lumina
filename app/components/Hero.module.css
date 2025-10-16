@@ -1,0 +1,63 @@
+.hero{
+background: white;/* Fondo con degradado radial */  
+padding: 4rem 0; /* Espaciado vertical */
+border-bottom: 1px solid var(--border); /* Borde inferior con color de variable */
+}
+
+.innerCentro{
+  /* Estilos para el contenedor interno */
+  width: min(100% - 2rem, var(--container)); /* Ancho máximo definido por variable */
+  margin-inline: auto; /* Centra el contenedor horizontalmente */
+  text-align: center; /* Centra el texto */
+}
+.innerDerecha{
+  /* Estilos para el contenedor interno */
+  width: min(100% - 2rem, var(--container)); /* Ancho máximo definido por variable */
+  margin-inline: auto; /* Centra el contenedor horizontalmente */
+  text-align: right; /* Centra el texto */
+}
+.innerFlex {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  text-align: left;
+}
+.cta {
+  /* Estilos para el botón de llamada a la acción */
+  display: block; /* Hace que el botón se comporte como un bloque en línea */
+  margin: 1rem auto 0 auto; /* Centra el botón horizontalmente */
+  padding: 0.75rem 1rem; /* Espaciado interno */
+  background: var(--brand--600); /* Color de fondo usando variable */
+  color: rgb(0, 0, 0); /* Color de texto blanco */
+  border-radius: 9px; /* Bordes redondeados */
+  font-weight: 700; /* Negrita */
+  box-shadow: var(--shadow); /* Sombra usando variable */
+  text-align: center; /* Centra el texto */
+  width: fit-content; /* El ancho se ajusta al contenido */
+}
+.cta:hover {
+  /* Estilos para el botón al pasar el cursor */
+  filter: brightness(1.1); /* Efecto de brillo */
+}
+
+.hero-flex {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.hero-img {
+  flex: 0 0 auto;
+}
+.hero-text {
+  flex: 1 1 0;
+  min-width: 250px;
+}
+.heroImg {
+  flex: 0 0 auto;
+}
+.heroContent {
+  flex: 1 1 0;
+  min-width: 250px;
+}
