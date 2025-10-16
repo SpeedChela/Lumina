@@ -1,3 +1,12 @@
+Dado temas de las dependencias entre Linux y Windows se debe de eliminar la carpeta node_modules y reinstalarlo con el comando
+
+npm install
+
+esto sera en la terminal en la carpeta del proyecto, con esto lo demas funciona con normalidad
+
+Gracias por leer :)
+Bonito dia.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
