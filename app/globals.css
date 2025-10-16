@@ -8,7 +8,7 @@
   --text: #000000; /* Color del texto principal */
   --muted: #b3ab99; /* Color para elementos atenuados o secundarios */
   --brand: #f0d58c; /* Color de marca o acento principal */
-  --brand--600: #f7ee7a; /* Variante más intensa del color de marca */
+  --brand--600: #f0d58c; /* Variante más intensa del color de marca */
   --surface: #fdf5e6; /* Color para superficies o elementos destacados */
   --card: #ffffff; /* Color para tarjetas o bloques */
   --border: #ffffff; /* Color para bordes de elementos */
