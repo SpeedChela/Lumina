@@ -147,7 +147,9 @@ p {
   font-weight: 600; /* Negrita para el texto del botón */
   border: 1px solid transparent; /* Borde transparente para mantener tamaño */
 }
-
+.boton:hover {
+  filter: brightness(1.1); /* Efecto de brillo al pasar el mouse */
+} 
 /* =========================
    GRID Y TARJETAS
    ========================= */
