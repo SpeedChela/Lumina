@@ -38,7 +38,7 @@ body {
   z-index: 1000; /* Se asegura que esté por encima de otros elementos */
   backdrop-filter: blur(8px); /* Aplica desenfoque al fondo del header */
   background: #ffffff; /* Fondo blanco */
-  border-bottom: 1px solid var(--border); /* Borde inferior */
+  border-bottom: 5px solid var(--border); /* Borde inferior */
 }
 
 .nav {
@@ -140,22 +140,24 @@ p {
    ========================= */
 .btn {
   display: inline-block; /* Permite aplicar padding y margen */
-  padding: .75rem 1.0rem; /* Espaciado interno */
+  padding: .4rem 0.8rem; /* Espaciado interno */
   border-radius: 9px; /* Esquinas redondeadas */
   background: var(--brand); /* Fondo con color de marca */
   color: rgb(0, 0, 0); /* Color de texto en el botón */
   font-weight: 600; /* Negrita para el texto del botón */
   border: 1px solid transparent; /* Borde transparente para mantener tamaño */
+  font-size: 0.40rem; /* Tamaño de fuente */
 }
 
 .btnTransparente {
   display: inline-block; /* Permite aplicar padding y margen */
-  padding: .75rem 1.0rem; /* Espaciado interno */
+  padding: .4rem 0.8rem; /* Espaciado interno */
   border-radius: 9px; /* Esquinas redondeadas */
   background: transparent; /* Fondo con color de marca */
   color: rgb(0, 0, 0); /* Color de texto en el botón */
   font-weight: 600; /* Negrita para el texto del botón */
   border: 1px solid transparent; /* Borde transparente para mantener tamaño */
+  font-size: 0.40rem; /* Tamaño de fuente */
 }
 
 .boton:hover {
@@ -288,8 +290,4 @@ h3 {
 
 .footer-redes {
   justify-content: flex-end; /* Redes a la derecha */
-}
-.btn-small {
-  padding: 0.4rem 0.8rem; /* Espaciado interno más pequeño */
-  font-size: 0.60rem; /* Tamaño de fuente más pequeño */
 }

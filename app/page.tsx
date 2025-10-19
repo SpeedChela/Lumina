@@ -15,18 +15,18 @@ export default function Home() {
           {/* Logo y nombre de la marca alineados a la izquierda */}
           <div className="nav-logo">
             <Image
-              src="/Images/luminalogo.png" // Ruta de la imagen del logo (debe estar en /public/Images)
+              src="/Images/LogoLetra.png" // Ruta de la imagen del logo (debe estar en /public/Images)
               alt="Logo Lumina" // Texto alternativo para accesibilidad
               width={50} // Ancho de la imagen
               height={30} // Alto de la imagen
-              style={{ maxWidth: "50px", width: "100%", margin: "0 1rem 0 0", borderRadius: "12px" }} // Estilos en línea
+              style={{ maxWidth: "90px", width: "100%", margin: "0 1rem 0 0", borderRadius: "12px" }} // Estilos en línea
             />
             <span className="brand"></span> {/* Nombre de la marca */}
           </div>
           {/* Menú de navegación alineado a la derecha */}
           <ul className="menu">
-            <li><a className="btn btn-small">Inicio de Sesion</a></li> {/* Botón de inicio de sesión */}
-            <li><a className="btnTransparente btn-small">Registrarse</a></li>     {/* Botón de registro */}
+            <li><a className="btn">Inicio de Sesion</a></li> {/* Botón de inicio de sesión */}
+            <li><a className="btnTransparente">Registrarse</a></li>     {/* Botón de registro */}
           </ul>
         </nav>
       </header>
@@ -46,7 +46,7 @@ export default function Home() {
           {/* Imagen del héroe alineada a la derecha */}
           <div className="hero-img">
             <Image
-              src="/Images/collares qhpt.png" // Imagen principal de la sección
+              src="/Images/collar.jpg" // Imagen principal de la sección
               alt="Collar elegante de la colección"
               width={300}
               height={200}
