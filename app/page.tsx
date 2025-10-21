@@ -65,7 +65,7 @@ export default function Home() {
               {/* Tarjeta 1: Anillos */}
               <article className="container section center card col-4 col-md-6 col-sm-12" role="listitem">
                 <Image
-                  src="/Images/anillos.png"
+                  src="/Images/anillos.webp"
                   alt="Collar elegante de la colección"
                   width={300}
                   height={200}
@@ -80,7 +80,7 @@ export default function Home() {
               {/* Tarjeta 2: Pulseras */}
               <article className="container section center card col-4 col-md-6 col-sm-12" role="listitem">
                 <Image
-                  src="/Images/pulseras.png"
+                  src="/Images/pulseras.jpg"
                   alt="Collar elegante de la colección"
                   width={300}
                   height={200}
@@ -95,7 +95,7 @@ export default function Home() {
               {/* Tarjeta 3: Collares */}
               <article className="container section center card col-4 col-md-6 col-sm-12" role="listitem">
                 <Image
-                  src="/Images/collares.png"
+                  src="/Images/collarPerla.jpg"
                   alt="Collar elegante de la colección"
                   width={300}
                   height={200}
