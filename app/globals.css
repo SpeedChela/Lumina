@@ -249,15 +249,16 @@ h3 {
    ========================= */
 .hero-flex {
   display: flex; /* Flexbox para alinear imagen y texto */
+  justify-content: center;
   align-items: center; /* Centra verticalmente */
-  gap: 2rem; /* Espacio entre imagen y texto */
+  gap: 1rem; /* Espacio entre imagen y texto */
   flex-wrap: wrap; /* Permite que se apilen en pantallas pequeñas */
 }
 .hero-img {
-  flex: 0 0 auto; /* Imagen no crece ni se reduce */
+  flex: 1 0 auto; /* Imagen no crece ni se reduce */
 }
 .hero-text {
-  flex: 1 1 0; /* Texto ocupa el espacio restante */
+  flex: 5 1 0; /* Texto ocupa el espacio restante */
   min-width: 250px; /* Ancho mínimo para el texto */
 }
 
