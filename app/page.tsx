@@ -41,7 +41,7 @@ export default function Home() {
             <h1 id="hero-title">Collares que hablan por ti</h1>
             <h2>Cada detalle refleja elegancia cada,</h2>
             <h2>pieza esta hecha para contar una historia</h2>
-            <p><a className="btn">Ver coleccion</a></p> {/* Botón de llamada a la acción */}
+            <p><a className="btn btn:hover">Ver coleccion</a></p> {/* Botón de llamada a la acción */}
           </div>
           {/* Imagen del héroe alineada a la derecha */}
           <div className="hero-img">
