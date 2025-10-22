@@ -11,22 +11,22 @@ export default function Home() {
       {/* Header principal del sitio */}
       <header className="site-header">
         {/* Barra de navegación principal */}
-        <nav className="container nav-flex">
+        <nav className="container nav">
           {/* Logo y nombre de la marca alineados a la izquierda */}
           <div className="nav-logo">
             <Image
               src="/Images/LogoLetra.png" // Ruta de la imagen del logo (debe estar en /public/Images)
               alt="Logo Lumina" // Texto alternativo para accesibilidad
-              width={50} // Ancho de la imagen
-              height={30} // Alto de la imagen
+              width={220} // Ancho de la imagen
+              height={200} // Alto de la imagen
               style={{ maxWidth: "90px", width: "100%", margin: "0 1rem 0 0", borderRadius: "12px" }} // Estilos en línea
             />
             <span className="brand"></span> {/* Nombre de la marca */}
           </div>
           {/* Menú de navegación alineado a la derecha */}
           <ul className="menu">
-            <li><a className="btn">Inicio de Sesion</a></li> {/* Botón de inicio de sesión */}
-            <li><a className="btnTransparente">Registrarse</a></li>     {/* Botón de registro */}
+            <li><a className="btnTransparente btnTransparente:hover">Inicio de Sesion</a></li> {/* Botón de inicio de sesión */}
+            <li><a className="btnTransparente btnTransparente:hover">Registrarse</a></li>     {/* Botón de registro */}
           </ul>
         </nav>
       </header>
@@ -111,7 +111,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Sección FAQ estilo acordeón */}
+          {/* Sección FAQ estilo acordeón */}
         <section className="faq section" aria-labelledby="faq-title">
           <h2 id="faq-title">Preguntas Frecuentes</h2>
           <div className="container">
