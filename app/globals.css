@@ -173,6 +173,29 @@ p {
   cursor: pointer; /* Cambia el cursor a mano al pasar sobre el botón */
 }
 
+/* Botón amarillo para "Registrarse" */
+.btnYellow {
+  display: inline-block;
+  padding: 0.55rem 0.9rem;
+  background: #f5e5b8; /* amarillo claro */
+  color: #1a1a1a;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid #e2cfa0;
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+
+.btnYellow:hover,
+.btnYellow:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  outline: none;
+}
+
+/* Asegura que los links no cambien estilo por defecto dentro del nav */
+.menu .btnYellow { line-height: 1; }
+
 /* =========================
    GRID Y TARJETAS
    ========================= */
