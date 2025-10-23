@@ -1,4 +1,7 @@
 /* ...existing code... */
+
+/* Contenedor principal de la página de login.
+   Define altura mínima, color de fondo y uso de flex para apilar contenido. */
 .loginPage {
   min-height: 100vh;
   background: #f8f6f2;
@@ -6,11 +9,13 @@
   flex-direction: column;
 }
 
+/* Wrapper central que contiene las dos columnas (marca + formulario).
+   Limita ancho, centra en la página, usa grid para columnas y añade tarjeta blanca. */
 .loginWrapper {
   max-width: 1100px;
   margin: 2.5rem auto;
   display: grid;
-  grid-template-columns: 1fr 420px;
+  grid-template-columns: 1fr 420px; /* columna grande para branding + columna fija para formulario */
   gap: 2.5rem;
   align-items: center;
   padding: 2rem;
@@ -19,24 +24,26 @@
   border-radius: 8px;
 }
 
-/* Left column (branding) */
+/* Columna izquierda: contenedor de marca (logo, tagline, icono). */
 .brandCol {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .brandInner {
-  text-align: left;
+  text-align: left; /* alinear el contenido de la marca a la izquierda dentro de la columna */
 }
 .logo {
   display: block;
-  object-fit: contain;
+  object-fit: contain; /* asegura que la imagen mantenga proporciones */
 }
 .tagline {
   margin: 0.6rem 0 1.2rem;
   font-weight: 600;
   color: #222;
 }
+
+/* Recuadro que rodea el icono/diamante para darle fondo y separación. */
 .diamond {
   background: #fbf3e6;
   padding: 1rem;
@@ -45,7 +52,7 @@
   margin-top: 1rem;
 }
 
-/* Right column (form) */
+/* Columna derecha: contiene el formulario. */
 .formCol {
   display: flex;
   align-items: center;
@@ -53,19 +60,19 @@
 }
 .card {
   width: 100%;
-  padding: 1.6rem;
+  padding: 1.6rem; /* espacio interior de la tarjeta del formulario */
 }
 .cardHeader h1 {
   margin: 0 0 6px;
-  font-size: 1.4rem;
+  font-size: 1.4rem; /* título principal del formulario */
 }
 .cardSubtitle {
   margin: 0 0 1rem;
   color: #666;
-  font-size: 0.95rem;
+  font-size: 0.95rem; /* subtítulo de ayuda bajo el título */
 }
 
-/* Form */
+/* Formulario: disposición vertical con separación entre campos. */
 .form {
   display: flex;
   flex-direction: column;
@@ -75,6 +82,8 @@
   font-size: 0.85rem;
   color: #333;
 }
+
+/* Estilo base para los inputs (correo y contraseña). */
 .input {
   padding: 0.85rem 0.9rem;
   border-radius: 8px;
@@ -84,20 +93,34 @@
   width: 100%;
   box-sizing: border-box;
 }
+
+/* Fila que contiene el input de contraseña + botón para mostrar/ocultar.
+   Se usa flex para que el input ocupe el espacio restante y el botón mantenga su tamaño. */
 .passwordRow {
   display: flex;
   gap: 0.5rem;
   align-items: center;
 }
-.toggleBtn {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 1.05rem;
-  padding: 0.2rem 0.5rem;
+
+/* Asegura que el input dentro de .passwordRow ocupe todo el espacio disponible
+   y no genere overflow dentro del contenedor flex. */
+.passwordRow .input {
+  flex: 1 1 auto;
+  min-width: 0; /* evita overflow en contenedores flex */
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Row with checkbox + forgot link */
+/* Botón toggle: no crece, centrado, sirve para icono/emoji de mostrar contraseña. */
+.passwordRow .toggleBtn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* opcional: se puede definir ancho/alto aquí para consistencia visual */
+}
+
+/* Fila con checkbox "recuérdame" y enlace "olvidaste contraseña". */
 .row {
   display: flex;
   justify-content: space-between;
@@ -116,7 +139,7 @@
   text-decoration: none;
 }
 
-/* Buttons and socials */
+/* Botón principal de enviar (Entrar). */
 .primaryBtn {
   margin-top: 0.5rem;
   padding: 0.9rem;
@@ -126,12 +149,16 @@
   cursor: pointer;
   font-weight: 600;
 }
+
+/* Separador de opciones sociales: texto "o continuar con". */
 .or {
   text-align: center;
   color: #999;
   margin: 0.85rem 0 0.4rem;
   font-size: 0.85rem;
 }
+
+/* Contenedor de botones sociales (Facebook, Apple, Google). */
 .socials {
   display: flex;
   gap: 0.6rem;
@@ -147,7 +174,7 @@
   cursor: pointer;
 }
 
-/* Footer text */
+/* Texto inferior con enlace para registrarse. */
 .register {
   text-align: center;
   color: #666;
@@ -159,12 +186,12 @@
   text-decoration: none;
 }
 
-/* Responsive */
+/* Responsive: en pantallas pequeñas apila las columnas en una sola columna. */
 @media (max-width: 900px) {
   .loginWrapper {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* una sola columna en mobile */
     padding: 1.5rem;
   }
-  .diamond { margin: 1rem auto 0; }
+  .diamond { margin: 1rem auto 0; } /* centrar el icono en mobile */
 }
 /* ...existing code... */
