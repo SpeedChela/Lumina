@@ -1,6 +1,7 @@
 import Image from "next/image"; // Importa el componente optimizado de imágenes de Next.js
 import Hero from "./components/Hero"; // Importa el componente Hero (puedes quitarlo si no lo usas)
-
+import Link from "next/link"
+import Header from "./components/Header";
 /* 
   Componente principal de la página Home.
   Estructura la página con header, main (contenido principal) y footer.
@@ -8,29 +9,7 @@ import Hero from "./components/Hero"; // Importa el componente Hero (puedes quit
 export default function Home() {
   return (
     <>
-      {/* Header principal del sitio */}
-      <header className="site-header">
-        {/* Barra de navegación principal */}
-        <nav className="container nav">
-          {/* Logo y nombre de la marca alineados a la izquierda */}
-          <div className="nav-logo">
-            <Image
-              src="/Images/LogoLetra.png" // Ruta de la imagen del logo (debe estar en /public/Images)
-              alt="Logo Lumina" // Texto alternativo para accesibilidad
-              width={220} // Ancho de la imagen
-              height={200} // Alto de la imagen
-              style={{ maxWidth: "90px", width: "100%", margin: "0 1rem 0 0", borderRadius: "12px" }} // Estilos en línea
-            />
-            <span className="brand"></span> {/* Nombre de la marca */}
-          </div>
-          {/* Menú de navegación alineado a la derecha */}
-          <ul className="menu">
-            <li><a className="btnTransparente btnTransparente:hover">Inicio de Sesion</a></li> {/* Botón de inicio de sesión */}
-            <li><a className="btnTransparente btnTransparente:hover">Registrarse</a></li>     {/* Botón de registro */}
-          </ul>
-        </nav>
-      </header>
-
+     <Header showLoginButton={true} />
       {/* Contenido principal */}
       <main className="container">
         {/* Sección principal del héroe (hero section) */}
@@ -157,7 +136,13 @@ export default function Home() {
           </div>
           {/* Marca Lumina centrada */}
           <div className="footer-brand">
-            <p>Lumina</p>
+            <Image
+              src="/Images/LogoLetra.png" // Ruta de la imagen del logo (debe estar en /public/Images)
+              alt="Logo Lumina" // Texto alternativo para accesibilidad
+              width={220} // Ancho de la imagen
+              height={200} // Alto de la imagen
+              style={{ maxWidth: "90px", width: "100%", margin: "0 1rem 0 0", borderRadius: "12px" }} // Estilos en línea
+            />
           </div>
           {/* Redes sociales alineadas a la derecha */}
           <div className="footer-redes">

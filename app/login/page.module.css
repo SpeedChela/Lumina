@@ -1,0 +1,170 @@
+/* ...existing code... */
+.loginPage {
+  min-height: 100vh;
+  background: #f8f6f2;
+  display: flex;
+  flex-direction: column;
+}
+
+.loginWrapper {
+  max-width: 1100px;
+  margin: 2.5rem auto;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 2.5rem;
+  align-items: center;
+  padding: 2rem;
+  background: white;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+  border-radius: 8px;
+}
+
+/* Left column (branding) */
+.brandCol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.brandInner {
+  text-align: left;
+}
+.logo {
+  display: block;
+  object-fit: contain;
+}
+.tagline {
+  margin: 0.6rem 0 1.2rem;
+  font-weight: 600;
+  color: #222;
+}
+.diamond {
+  background: #fbf3e6;
+  padding: 1rem;
+  width: 180px;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+/* Right column (form) */
+.formCol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card {
+  width: 100%;
+  padding: 1.6rem;
+}
+.cardHeader h1 {
+  margin: 0 0 6px;
+  font-size: 1.4rem;
+}
+.cardSubtitle {
+  margin: 0 0 1rem;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.label {
+  font-size: 0.85rem;
+  color: #333;
+}
+.input {
+  padding: 0.85rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid #e6dccc;
+  background: #fff3d9;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+.passwordRow {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.toggleBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.05rem;
+  padding: 0.2rem 0.5rem;
+}
+
+/* Row with checkbox + forgot link */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+.checkbox {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.forgot {
+  font-size: 0.85rem;
+  color: #888;
+  text-decoration: none;
+}
+
+/* Buttons and socials */
+.primaryBtn {
+  margin-top: 0.5rem;
+  padding: 0.9rem;
+  border-radius: 8px;
+  background: #f5e5b8;
+  border: 1px solid #e2cfa0;
+  cursor: pointer;
+  font-weight: 600;
+}
+.or {
+  text-align: center;
+  color: #999;
+  margin: 0.85rem 0 0.4rem;
+  font-size: 0.85rem;
+}
+.socials {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-bottom: 0.6rem;
+}
+.socialBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid #e6e6e6;
+  background: white;
+  cursor: pointer;
+}
+
+/* Footer text */
+.register {
+  text-align: center;
+  color: #666;
+  margin-top: 0.4rem;
+}
+.link {
+  color: #222;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .loginWrapper {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+  .diamond { margin: 1rem auto 0; }
+}
+/* ...existing code... */
