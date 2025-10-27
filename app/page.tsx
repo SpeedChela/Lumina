@@ -6,6 +6,8 @@ import Header from "./components/Header";
   Componente principal de la página Home.
   Estructura la página con header, main (contenido principal) y footer.
 */
+
+/*namas ando viendo si ya quedo JAJAJAJA*/
 export default function Home() {
   return (
     <>
