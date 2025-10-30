@@ -1,0 +1,204 @@
+/* Variables para colores de Lumina — cámbialas por tus valores */
+:root {
+  --lumina-bg-a: #ffffff; /* fondo oscuro */
+  --lumina-bg-b: #ffffff; /* degradado secondary */
+  --lumina-accent: #edf792; /* verde/emerald */
+  --card-bg: rgba(10, 12, 20, 0.85);
+  --muted: #9aa3b2;
+  --text: #e6eef8;
+  --radius-lg: 24px;
+  --radius-md: 12px;
+}
+
+/* Reset mínimo para el root del componente */
+.lumina-signup-root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, var(--lumina-bg-a) 0%, var(--lumina-bg-b) 100%);
+}
+
+/* Sección con gradiente fondo absoluto */
+.lumina-section { position: relative; overflow: hidden; min-height: 100vh; }
+.lumina-section .bg-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.6));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Contenedor principal */
+.lumina-signup-root .max-w-7xl {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: calc(100% - 48px);
+  padding: 48px 24px;
+  box-sizing: border-box;
+}
+
+/* Grid simple en dos columnas responsivo */
+.lumina-signup-root .grid {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Hero izquierdo */
+.hero-left {
+  flex: 1 1 420px;
+  max-width: 520px;
+  padding-right: 8px;
+}
+.hero-left h1 {
+  font-size: 2.25rem;
+  line-height: 1.03;
+  margin: 0 0 12px 0;
+  color: #ffffff;
+  font-weight: 800;
+}
+.hero-left p {
+  color: var(--muted);
+  margin: 12px 0 20px;
+  max-width: 40rem;
+  font-size: 1rem;
+}
+
+/* CTA buttons (hero) */
+.hero-left .inline-flex {
+  display: inline-flex;
+  gap: 12px;
+}
+.hero-left .inline-flex a {
+  text-decoration: none;
+}
+.hero-left .inline-flex .btn-outline {
+  padding: 10px 18px;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.hero-left .inline-flex .btn-solid {
+  padding: 10px 18px;
+  border-radius: 14px;
+  background: var(--card-bg);
+  color: var(--text);
+  border: none;
+}
+
+/* Card derecho */
+.card-right {
+  flex: 1 1 480px;
+  display: flex;
+  justify-content: flex-end;
+}
+.card-wrapper {
+  width: 100%;
+  max-width: 560px;
+  background: linear-gradient(180deg, rgba(8,10,18,0.9), rgba(6,8,14,0.85));
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: 0 10px 40px rgba(3,6,12,0.6);
+  border: 1px solid rgba(255,255,255,0.03);
+  box-sizing: border-box;
+}
+
+/* Header inside card */
+.card-wrapper header { text-align: center; margin-bottom: 14px; }
+.card-wrapper .avatar-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(6,216,160,0.08);
+  margin: 0 auto 10px;
+  color: var(--lumina-accent);
+}
+.card-wrapper h2 { margin: 0; font-size: 1.5rem; color: var(--text); }
+.card-wrapper p { margin-top: 6px; color: var(--muted); font-size: 0.9rem; }
+
+/* Form */
+.card-wrapper form { margin-top: 6px; }
+.card-wrapper .space-y-4 > * + * { margin-top: 12px; }
+
+.card-wrapper label { display: block; font-size: 0.9rem; color: var(--muted); margin-bottom: 6px; }
+.card-wrapper input[type="text"],
+.card-wrapper input[type="email"],
+.card-wrapper input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(18,20,28,0.6);
+  color: var(--text);
+  outline: none;
+  box-sizing: border-box;
+  font-size: 0.95rem;
+}
+.card-wrapper input:focus {
+  box-shadow: 0 0 0 4px rgba(6,216,160,0.08);
+  border-color: rgba(6,216,160,0.5);
+}
+
+/* Checkbox + links row */
+.card-wrapper .flex { display:flex; align-items:center; justify-content:space-between; gap: 12px; }
+.card-wrapper .inline-flex { display:inline-flex; align-items:center; gap:8px; }
+.card-wrapper input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--lumina-accent); }
+
+/* Message */
+.card-wrapper .rounded-xl {
+  border-radius: 12px;
+  padding: 10px;
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+/* Primary button */
+.card-wrapper button[type="submit"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, var(--lumina-accent), #03b07d);
+  color: #06121b;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+}
+.card-wrapper button[type="submit"]:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Divider + google button */
+.card-wrapper .my-4 { display:flex; align-items:center; gap:12px; margin: 18px 0; }
+.card-wrapper .my-4 .h-px { height:1px; background: rgba(255,255,255,0.04); flex:1; }
+.card-wrapper .google-btn {
+  width: 100%;
+  display:flex;
+  gap: 10px;
+  align-items:center;
+  justify-content:center;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  color: var(--text);
+  cursor: pointer;
+}
+
+/* Footer */
+.site-footer { color: var(--muted); }
+
+/* Responsive: stack columns on small screens */
+@media (max-width: 820px) {
+  .lumina-signup-root .grid { flex-direction: column; gap: 18px; padding: 12px; }
+  .hero-left, .card-right { flex-basis: 100%; max-width: 100%; width: 100%; }
+  .card-wrapper { max-width: 100%; padding: 22px; border-radius: 16px; }
+  .hero-left h1 { font-size: 1.75rem; }
+}

@@ -22,7 +22,7 @@ export default function Header({ showLoginButton = true }: Props) {
           {showLoginButton && (
             <>
               <li><Link href="/login" className="btnTransparente">Inicio de Sesión</Link></li>
-              <li><Link href="/register" className="btnYellow">Registrarse</Link></li>
+              <li><Link href="/singup" className="btnYellow">Registrarse</Link></li>
             </>
           )}
         </ul>
