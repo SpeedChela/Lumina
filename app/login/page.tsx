@@ -117,7 +117,7 @@ export default function LoginPage() {
 
               {/* Enlace para registrarse */}
               <p className={styles.register}>
-                ¿No tienes cuenta? <Link href="/register" className={styles.link}>Regístrate</Link>
+                ¿No tienes cuenta? <Link href="/singup" className={styles.link}>Regístrate</Link>
               </p>
 
               {/* NUEVO: Enlace para volver al menú principal */}

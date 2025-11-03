@@ -8,6 +8,7 @@ import { auth } from "../lib/firebase-cliente"; // Firebase auth instance initia
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"; // Firebase auth functions
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth"; // Google authentication provider
 import Image from "next/image"; // Import the Next.js Image component
+import Footer from "../components/Footer";
 
 export default function SignUpPage() { // signup page component
   const router = useRouter(); // router for router.push(...)
@@ -283,9 +284,7 @@ export default function SignUpPage() { // signup page component
       </section>
  
       {/* Simple footer (styles in signup.css) */}
-      <footer className="site-footer py-8 text-center text-sm">
-        Hecho con Tailwind · © 2025
-      </footer>
+      <Footer />
     </div>
    );
  }

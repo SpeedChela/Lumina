@@ -1,7 +1,7 @@
 import Image from "next/image"; // Importa el componente optimizado de imágenes de Next.js
 import Hero from "./components/Hero"; // Importa el componente Hero (puedes quitarlo si no lo usas)
-import Link from "next/link"
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 /* 
   Componente principal de la página Home.
   Estructura la página con header, main (contenido principal) y footer.
@@ -124,40 +124,7 @@ export default function Home() {
       </main>
 
       {/* Pie de página */}
-      <footer className="site-footer section">
-        <div className="footer-flex container">
-          {/* Logo en el footer alineado a la izquierda */}
-          <div className="footer-logo">
-            <Image
-              src="/Images/luminalogo.png"
-              alt="Logo Lumina"
-              width={50}
-              height={30}
-              style={{ maxWidth: "100px", width: "100%", margin: "1rem 0", borderRadius: "12px" }}
-            />
-          </div>
-          {/* Marca Lumina centrada */}
-          <div className="footer-brand">
-            <Image
-              src="/Images/LogoLetra.png" // Ruta de la imagen del logo (debe estar en /public/Images)
-              alt="Logo Lumina" // Texto alternativo para accesibilidad
-              width={220} // Ancho de la imagen
-              height={200} // Alto de la imagen
-              style={{ maxWidth: "90px", width: "100%", margin: "0 1rem 0 0", borderRadius: "12px" }} // Estilos en línea
-            />
-          </div>
-          {/* Redes sociales alineadas a la derecha */}
-          <div className="footer-redes">
-            <Image
-              src="/Images/redes.png"
-              alt="Redes sociales"
-              width={50}
-              height={30}
-              style={{ maxWidth: "100px", width: "100%", margin: "1rem 0", borderRadius: "12px" }}
-            />
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }
