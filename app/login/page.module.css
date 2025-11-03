@@ -31,7 +31,7 @@
   justify-content: center;
 }
 .brandInner {
-  text-align: left; /* alinear el contenido de la marca a la izquierda dentro de la columna */
+  text-align: center; /* alinear el contenido de la marca a la izquierda dentro de la columna */
 }
 .logo {
   display: block;
@@ -49,7 +49,7 @@
   padding: 1rem;
   width: 180px;
   border-radius: 8px;
-  margin-top: 1rem;
+  margin: 1rem auto 0;
 }
 
 /* Columna derecha: contiene el formulario. */
