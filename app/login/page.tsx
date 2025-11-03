@@ -119,6 +119,11 @@ export default function LoginPage() {
               <p className={styles.register}>
                 ¿No tienes cuenta? <Link href="/register" className={styles.link}>Regístrate</Link>
               </p>
+
+              {/* NUEVO: Enlace para volver al menú principal */}
+              <p className={styles.register} style={{ marginTop: '1rem' }}>
+                <Link href="/" className={styles.link}>Volver al Menú Principal</Link>
+              </p>
             </form>
           </div>
         </div>
