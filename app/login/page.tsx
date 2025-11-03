@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.css";
+import Footer from "../components/Footer";
 
 /* Componente de la página de login.
    - Usa estado local para alternar visibilidad de la contraseña.
@@ -128,6 +129,8 @@ export default function LoginPage() {
           </div>
         </div>
       </section>
+      <Footer />
     </main>
+    
   );
 }
