@@ -1,0 +1,91 @@
+.pageTitle {
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.productGrid {
+  display: grid;
+  /* 3 columnas en escritorio */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.productCard {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.productCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.productImageWrapper {
+  background: #f8f8f8; /* Fondo claro para la imagen */
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.productImage {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover; /* Usa 'contain' si prefieres que se vea completo */
+}
+
+.productName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.productPrice {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111;
+  margin-bottom: 0.5rem;
+}
+
+.productRating {
+  color: #f0d58c; /* Color de tu marca */
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
+
+.productLink {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #777;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.productLink:hover {
+  color: #000;
+}
+
+/* --- Responsive --- */
+/* 2 columnas en tablet */
+@media (max-width: 900px) {
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 1 columna en móvil */
+@media (max-width: 640px) {
+  .productGrid {
+    grid-template-columns: 1fr;
+  }
+}

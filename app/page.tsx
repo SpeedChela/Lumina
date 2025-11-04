@@ -2,6 +2,7 @@ import Image from "next/image"; // Importa el componente optimizado de imágenes
 import Hero from "./components/Hero"; // Importa el componente Hero (puedes quitarlo si no lo usas)
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Link from "next/link";
 /* 
   Componente principal de la página Home.
   Estructura la página con header, main (contenido principal) y footer.
@@ -56,7 +57,7 @@ export default function Home() {
                 <p>Descubre anillos diseñados para cada momento de tu vida.
                    Desde estilos minimalistas hasta piezas con piedras que roban miradas,
                     encuentra el complemento perfecto para expresar tu personalidad.</p>
-                <p><a className="btn">Comprar</a></p>
+                <p><Link href="/productos/anillos" className="btn">Comprar</Link></p>
               </article>
               {/* Tarjeta 2: Pulseras */}
               <article className="container section center card col-4 col-md-6 col-sm-12" role="listitem">
@@ -71,7 +72,7 @@ export default function Home() {
                 <p>Detalles que marcan la diferencia. Pulseras versátiles y sofisticadas,
                    ideales para llevar solas o en combinación, creando un estilo auténtico
                     y lleno de carácter.</p>
-                <p><a className="btn">Comprar</a></p>
+                <p><Link href="/productos/pulseras" className="btn">Comprar</Link></p>
               </article>
               {/* Tarjeta 3: Collares */}
               <article className="container section center card col-4 col-md-6 col-sm-12" role="listitem">
@@ -86,7 +87,7 @@ export default function Home() {
                 <p>Collares únicos que iluminan tu estilo. Desde cadenas delicadas hasta
                    diseños con brillo impactante, cada pieza está pensada para realzar tu
                     elegancia y acompañarte en cualquier ocasión</p>
-                <p><a className="btn">Comprar</a></p>
+                <p><Link href="/productos/collares" className="btn">Comprar</Link></p>
               </article>
             </div>
           </div>
