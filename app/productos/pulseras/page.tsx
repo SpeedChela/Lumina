@@ -18,7 +18,7 @@ const pulserasData = [
     id: 'pulsera-dije-corazon',
     nombre: 'Pulsera Dije Corazón',
     precio: 1200,
-    imagen: '/Images/pulseras.jpg', // Imagen que subiste
+    imagen: '/Images/pulsera1.jpg', // Imagen que subiste
     rating: 5,
   },
   {
