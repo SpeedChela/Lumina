@@ -25,28 +25,28 @@ const anillosData = [
     id: 'heart-ring',
     nombre: 'Heart Ring',
     precio: 2500,
-    imagen: '/Images/anillos.webp', // Imagen repetida como ejemplo
+    imagen: '/Images/anillo1.jpg', // Imagen repetida como ejemplo
     rating: 5,
   },
   {
     id: 'clavo-ring',
     nombre: 'Clavo Ring',
     precio: 2500,
-    imagen: '/Images/rncda.png', // Imagen repetida como ejemplo
+    imagen: '/Images/anillo2.jpg', // Imagen repetida como ejemplo
     rating: 5,
   },
   {
     id: 'two-tones-ring',
     nombre: 'Two Tones Ring',
     precio: 1600,
-    imagen: '/Images/anillos.webp', // Imagen repetida como ejemplo
+    imagen: '/Images/anillo3.jpg', // Imagen repetida como ejemplo
     rating: 5,
   },
   {
     id: 'emerald-ring',
     nombre: 'Emerald Ring',
     precio: 3000,
-    imagen: '/Images/rncda.png', // Imagen repetida como ejemplo
+    imagen: '/Images/anillo4.jpg', // Imagen repetida como ejemplo
     rating: 5,
   }
 ];
