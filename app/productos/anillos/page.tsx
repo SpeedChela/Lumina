@@ -23,7 +23,7 @@ const anillosData = [
   },
   {
     id: 'heart-ring',
-    nombre: 'Heart Ring',
+    nombre: 'Flower Ring',
     precio: 2500,
     imagen: '/Images/anillo1.jpg', // Imagen repetida como ejemplo
     rating: 5,
