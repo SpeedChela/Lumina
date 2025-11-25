@@ -3,12 +3,12 @@ import React, { useState } from "react"; // import React and useState hook for l
 import "./signup.css" // <-- import custom CSS
 import Link from "next/link"; // Next.js Link component for internal navigation
 import { useRouter } from "next/navigation"; // hook for programmatic redirection in Next 13+
-import Header from "../components/Header"; // reusable Header component
-import { auth } from "../lib/firebase-cliente"; // Firebase auth instance initialized in lib
+import Header from "../../components/Header"; // reusable Header component
+import { auth } from "../../lib/firebase-cliente"; // Firebase auth instance initialized in lib
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"; // Firebase auth functions
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth"; // Google authentication provider
 import Image from "next/image"; // Import the Next.js Image component
-import Footer from "../components/Footer";
+import Footer from "../../components/Footer";
 
 export default function SignUpPage() { // signup page component
   const router = useRouter(); // router for router.push(...)

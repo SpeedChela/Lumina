@@ -1,7 +1,7 @@
 import Image from "next/image"; // Importa el componente optimizado de imágenes de Next.js
-import Hero from "./components/Hero"; // Importa el componente Hero (puedes quitarlo si no lo usas)
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Hero from "../components/Hero"; // Importa el componente Hero (puedes quitarlo si no lo usas)
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import Link from "next/link";
 /* 
   Componente principal de la página Home.

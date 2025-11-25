@@ -1,9 +1,10 @@
-import Header from '@/app/components/Header';
-import Footer from '@/app/components/Footer';
+import Header from '../../../../components/Header';
+import Footer from '../../../../components/Footer';
+import ClientImageZoom from '../../../../components/ClientImageZoom';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { CSSProperties } from 'react';
-import ClientImageZoom from '@/app/components/ClientImageZoom'; // <-- añadido
+ // <-- añadido
 
 // --- Datos de Ejemplo (Deben coincidir con los de la página anterior) ---
 // En una app real, esto vendría de una base de datos
