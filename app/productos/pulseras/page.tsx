@@ -7,6 +7,7 @@ import styles from '../productos.module.css'; // Reutilizamos los estilos
 // --- Datos de Ejemplo para Pulseras ---
 // (Usando las imágenes que subiste)
 const pulserasData = [
+  //les juro que no quise romperloooo :c
   {
     id: 'set-pulseras-oro',
     nombre: 'Set Pulseras de Oro',
