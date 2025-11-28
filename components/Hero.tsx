@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import styles from './Hero.module.css';
+import Link from 'next/link';
 
 export default function Hero() {
     return (
@@ -19,7 +20,7 @@ export default function Hero() {
                     <h2>*Diseños unicos que celebran cada momento especial</h2>
                     <h2>*Piezas elegantes con acabados perfectos para destacar</h2>
                     <h2>*Encuentra el anillo ideal para ti o para regalar a alguien especial</h2>
-                    <a className={styles.cta}>Ver Coleccion</a>
+                    <a><Link href="/productos/anillos" className="btn">Comprar</Link></a>
                 </div>
             </div>
         </section>

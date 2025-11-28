@@ -1,80 +1,72 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import Header from '../../../components/Header';
-import Footer from '../../../components/Footer';
-import styles from '../productos.module.css'; // Reutilizamos los estilos
+import Link from "next/link";
+import styles from "./pulseras.module.css";
 
-// --- Datos de Ejemplo para Pulseras ---
-// (Usando las imágenes que subiste)
-const pulserasData = [
-  //les juro que no quise romperloooo :c
+type Pulsera = {
+  id: string;
+  nombre: string;
+  precio: number;
+  imagen: string;
+  rating: number;
+  descripcion: string;
+};
+
+const pulserasData: Pulsera[] = [
   {
-    id: 'set-pulseras-oro',
-    nombre: 'Set Pulseras de Oro',
+    id: "set-pulseras-oro",
+    nombre: "Set Pulseras de Oro",
     precio: 2200,
-    imagen: '/Images/pulseras.webp', // Imagen que subiste
+    imagen: "/Images/pulseras.webp",
     rating: 5,
+    descripcion: "Set de tres pulseras de oro para combinar y crear un look único.",
   },
   {
-    id: 'pulsera-dije-corazon',
-    nombre: 'Pulsera Dije Corazón',
+    id: "pulsera-dije-corazon",
+    nombre: "Pulsera Dije Corazón",
     precio: 1200,
-    imagen: '/Images/pulsera1.jpg', // Imagen que subiste
+    imagen: "/Images/pulseras.jpg",
     rating: 5,
+    descripcion: "Encantadora pulsera con dijes de corazón y llave.",
   },
   {
-    id: 'pulsera-moderna',
-    nombre: 'Pulsera Dorada Moderna',
+    id: "pulsera-moderna",
+    nombre: "Pulsera Dorada Moderna",
     precio: 1500,
-    imagen: '/Images/pulseras.png', // Imagen que subiste
+    imagen: "/Images/pulseras.png",
     rating: 4,
-  }
+    descripcion: "Pulsera de eslabones dorados estilo moderno.",
+  },
 ];
-// --- Fin de Datos ---
 
-export default function PulserasPage() {
-  
-  const renderStars = (rating: number) => {
-    return '★★★★★'.slice(0, rating) + '☆☆☆☆☆'.slice(rating);
-  };
-
+export default function PulserasListadoPage() {
   return (
-    <>
-      <Header showLoginButton={true} />
-      <main className="container section">
-        
-        <h1 className={styles.pageTitle}>Pulseras Lumina</h1>
-
-        <div className={styles.productGrid}>
-          {pulserasData.map((pulsera) => (
-            <div key={pulsera.id} className={styles.productCard}>
-              <Link href={`/productos/pulseras/${pulsera.id}`}>
-                <div className={styles.productImageWrapper}>
-                  <Image
-                    src={pulsera.imagen}
-                    alt={pulsera.nombre}
-                    width={300}
-                    height={300}
-                    className={styles.productImage}
-                  />
-                </div>
-              </Link>
-              <h2 className={styles.productName}>{pulsera.nombre}</h2>
-              <p className={styles.productPrice}>
-                ${pulsera.precio.toLocaleString('es-MX')}
-              </p>
-              <div className={styles.productRating}>
-                {renderStars(pulsera.rating)}
-              </div>
-              <Link href={`/productos/pulseras/${pulsera.id}`} className={styles.productLink}>
-                Comprar
-              </Link>
+    <main className="container section">
+      <h1 className={styles.listHeading}>Pulseras Lumina</h1>
+      <div className={styles.cardsGrid}>
+        {pulserasData.map((p) => (
+          <div key={p.id} className={styles.productCard}>
+            <div className={styles.imageWrap}>
+              <img src={p.imagen} alt={p.nombre} className={styles.cardImage} />
             </div>
-          ))}
-        </div>
-
-      </main>
-      <Footer />
-    </>
+            <div className={styles.cardBody}>
+              <h2 className={styles.cardTitle}>{p.nombre}</h2>
+              <p className={styles.cardPrice}>${p.precio.toLocaleString("es-MX")}</p>
+              <div className={styles.cardRating}>
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <span
+                    key={i}
+                    className={i < p.rating ? `${styles.star} ${styles.filled}` : styles.star}
+                  >
+                    ★
+                  </span>
+                ))}
+              </div>
+              <div className={styles.cardActions}>
+                <Link href={`/productos/pulseras/${p.id}`} className={styles.detailBtn}>DETALLE</Link>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </main>
   );
 }

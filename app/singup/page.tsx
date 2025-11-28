@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"; // hook for programmatic redirectio
 import Header from "../../components/Header"; // reusable Header component
 import { auth } from "../../lib/firebase-cliente"; // Firebase auth instance initialized in lib
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"; // Firebase auth functions
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth"; // Google authentication provider
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"; // Google authentication provider
 import Image from "next/image"; // Import the Next.js Image component
 import Footer from "../../components/Footer";
 
@@ -49,39 +49,72 @@ export default function SignUpPage() { // signup page component
 
     setLoading(true); // activates loading indicator
     try {
+      // 1. Crear usuario en Firebase
       const cred = await createUserWithEmailAndPassword(auth, email.trim(), password);
-      // creates user in Firebase Auth with email and password
+      
+      // 2. Actualizar perfil (Nombre)
       if (cred.user && name.trim()) {
         await updateProfile(cred.user, { displayName: name.trim() }); 
-        // optional: adds displayName to the user's profile in Firebase
       }
-      setIsError(false); // no error
-      setMessage("Usuario creado correctamente. Redirigiendo..."); // success message
-      setTimeout(() => router.push("/login"), 900); // redirects to login after 900ms
+
+      // --- NUEVO: Lógica de Cookie de Sesión ---
+      
+      // 3. Obtener el token de identificación
+      const idToken = await cred.user.getIdToken();
+
+      // 4. Llamar a la API para crear la cookie
+      const response = await fetch("/api/sessionLogin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken, remember: true }), // Por defecto recordamos la sesión al registrarse
+      });
+
+      if (response.ok) {
+        setIsError(false);
+        setMessage("¡Cuenta creada! Entrando..."); 
+        // 5. Redirigir directamente al Dashboard
+        router.push("/dashboard");
+        router.refresh(); 
+      } else {
+        console.error("Error creating session cookie");
+        // Fallback: Si falla la cookie, mandarlo al login para que intente entrar manual
+        setIsError(true);
+        setMessage("Cuenta creada, pero hubo un error de conexión. Por favor inicia sesión.");
+        setTimeout(() => router.push("/login"), 2000);
+      }
+
     } catch (err: unknown) {
       console.error("Firebase signup error:", err); // logs error to console
       setIsError(true);
       setMessage(err instanceof Error ? err.message : "Error al crear usuario."); 
-      // displays error message if it's an Error instance, otherwise a generic message
     } finally {
       setLoading(false); // always deactivates loading indicator
     }
   }
-  const signupWithGoogle = () => {
-    // placeholder function for Google registration (not fully implemented)
-    const provider = new GoogleAuthProvider();
-    const auth = getAuth();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This runs if registration is successful
-        console.log("Registro exitoso con Google:", result);
-      })
-      .catch((error) => {
-        // This runs if there is an error
-        console.error("Error en el registro con Google:", error);
+
+  const signupWithGoogle = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider); // ✅ usa auth importado
+      
+      const idToken = await result.user.getIdToken();
+      const response = await fetch("/api/sessionLogin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken, remember: true }),
       });
 
+      if (response.ok) {
+        router.push("/dashboard");
+        router.refresh();
+      } else {
+        console.error("Error sesión Google");
+      }
+    } catch (error) {
+      console.error("Error en el registro con Google:", error);
+    }
   }
+
   return (
     <div className="lumina-signup-root">
       <Header showLoginButton={true} /> {/* header with login button controlled by prop */}
@@ -162,7 +195,7 @@ export default function SignUpPage() { // signup page component
                       className="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-slate-900 outline-none focus:ring-2 focus:ring-[#f0d58c]"
                     />
                   </div>
-                  <p> tu nombre es {name}</p> {/* debug / feedback showing the name (can remove in production) */}
+                  
                   <div>
                     <label htmlFor="email" className="mb-1 block text-sm font-medium text-slate-900">Email</label>
                     <input
@@ -177,7 +210,7 @@ export default function SignUpPage() { // signup page component
                       className="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-slate-900 outline-none focus:ring-2 focus:ring-[#f0d58c]"
                     />
                   </div>
-                  <p> tu correo es {email}</p> {/* temporary feedback */}
+                  
                   <div>
                     <label htmlFor="password" className="mb-1 block text-sm font-medium text-slate-900">Contraseña</label>
                     <input
@@ -193,7 +226,7 @@ export default function SignUpPage() { // signup page component
                       className="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-slate-900 outline-none focus:ring-2 focus:ring-[#f0d58c]"
                     />
                   </div>
-                  <p> tu contraseña es {password}</p> {/* caution: never show passwords in production */}
+                  
                   <div>
                     <label htmlFor="confirm" className="mb-1 block text-sm font-medium text-slate-900">Confirmar contraseña</label>
                     <input
@@ -258,7 +291,7 @@ export default function SignUpPage() { // signup page component
                   className="google-btn w-full rounded-xl border px-4 py-2 font-medium inline-flex items-center justify-center gap-2 cursor-pointer"
                   aria-label="Continuar con Google"
                   type="button"
-                  onClick={() => {signupWithGoogle()}} // calls placeholder function
+                  onClick={signupWithGoogle} // calls function
                 >
                   <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor" aria-hidden="true">
                     <path d="M21.35 11.1h-9.18v2.98h5.27a4.52 4.52 0 0 1-1.95 2.96 6.06 6.06 0 0 1-3.32.96 6.06 6.06 0 0 1-4.28-1.78 6.26 6.26 0 0 1-1.76-4.4 6.25 6.25 0 0 1 1.76-4.4 6.06 6.06 0 0 1 4.28-1.78c1.46 0 2.78.5 3.82 1.33l2.1-2.1A9.3 9.3 0 0 0 12.17 2 9.1 9.1 0 0 0 5.7 4.7 9.25 9.25 0 0 0 3 11.82a9.25 9.25 0 0 0 2.7 7.12A9.1 9.1 0 0 0 12.17 22c2.49 0 4.57-.82 6.08-2.37 1.56-1.56 2.41-3.77 2.41-6.42 0-.68-.05-1.28-.31-2.11Z" />
