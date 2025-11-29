@@ -212,6 +212,14 @@ p {
   padding: 1.2rem; /* Espaciado interno */
   box-shadow: var(--shadow); /* Sombra para efecto de elevación */
   text-align: center; /* Centra el texto dentro de la tarjeta */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;/*Empuja el contenido hacia arriba y abajo*/
+  height: 100%; /* Asegura que la tarjeta ocupe todo el alto disponible */
+}
+
+.card p:last-of-type {
+  margin-top: auto; /* Empuja el botón hacia abajo */
 }
 
 h3 {
