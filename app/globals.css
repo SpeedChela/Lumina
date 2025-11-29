@@ -88,6 +88,24 @@ a:hover {
   cursor: pointer; /* Cambia el cursor a mano en todos los enlaces */
 }
 
+/* Navegación interna del header (para dashboard / landing */
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-left: 2rem;
+}
+.navLink {
+  font-size: 0.95rem;
+  color: #333;
+  text-decoration: none;
+  transition: color .2s;
+}
+.navLink:hover {
+  color: #1a1a1a;
+  text-decoration: underline;
+}
+
 /* =========================
    CONTENEDORES Y SECCIONES
    ========================= */

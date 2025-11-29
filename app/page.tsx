@@ -1,7 +1,7 @@
 import Image from "next/image"; // Importa el componente optimizado de imágenes de Next.js
-import Hero from "./components/Hero"; // Importa el componente Hero (puedes quitarlo si no lo usas)
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Hero from "../components/Hero"; // Importa el componente Hero (puedes quitarlo si no lo usas)
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import Link from "next/link";
 /* 
   Componente principal de la página Home.
@@ -23,7 +23,7 @@ export default function Home() {
             <h1 id="hero-title">Collares que hablan por ti</h1>
             <h2>Cada detalle refleja elegancia cada,</h2>
             <h2>pieza esta hecha para contar una historia</h2>
-            <p><a className="btn btn:hover">Ver coleccion</a></p> {/* Botón de llamada a la acción */}
+            <p><Link href="/productos/collares" className="btn">Comprar</Link></p> {/* Botón de llamada a la acción */}
           </div>
           {/* Imagen del héroe alineada a la derecha */}
           <div className="hero-img">

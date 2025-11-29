@@ -2,27 +2,61 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../lib/firebase-cliente";
 import styles from "./page.module.css";
-import Footer from "../components/Footer";
+import Footer from "../../components/Footer";
 
-/* Componente de la página de login.
-   - Usa estado local para alternar visibilidad de la contraseña.
-   - Export default para que Next.js lo trate como página en /login. */
 export default function LoginPage() {
-  // Estado que controla si la contraseña se muestra en texto plano o en oculto
+  const router = useRouter();
+  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      const idToken = await user.getIdToken();
+
+      const response = await fetch("/api/sessionLogin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken, remember: true }),
+      });
+
+      if (response.ok) {
+        router.push("/dashboard");
+        router.refresh();
+      } else {
+        setError("Error al iniciar sesión en el servidor.");
+      }
+    } catch (err: unknown) {
+      console.error("Login error:", err);
+      if (err instanceof Error && 'code' in err && (err as { code: string }).code === 'auth/invalid-credential') {
+        setError("Correo o contraseña incorrectos.");
+      } else {
+        setError("Ocurrió un error al intentar ingresar.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
-    // Contenedor principal de la página, aplica estilos desde el módulo CSS
     <main className={styles.loginPage}>
-
-      {/* Wrapper que contiene las dos columnas: branding (izq) + formulario (der) */}
       <section className={styles.loginWrapper}>
-
-        {/* Columna de marca: logo, eslogan e ícono */}
         <div className={styles.brandCol}>
           <div className={styles.brandInner}>
-            {/* Imagen del logo (usa public/Images/LogoLetra.png) */}
             <Image
               src="/Images/LogoLetra.png"
               alt="Lumina"
@@ -30,10 +64,7 @@ export default function LoginPage() {
               height={120}
               className={styles.logo}
             />
-            {/* Eslogan / tagline */}
             <h2 className={styles.tagline}>El brillo que te distingue</h2>
-
-            {/* Recuadro que contiene el ícono/diamante */}
             <div className={styles.diamond}>
               <Image
                 src="/Images/luminalogosolo.png"
@@ -45,20 +76,14 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Columna del formulario */}
         <div className={styles.formCol}>
           <div className={styles.card}>
-            {/* Encabezado de la tarjeta del formulario */}
             <header className={styles.cardHeader}>
               <h1>Iniciar sesión</h1>
               <p className={styles.cardSubtitle}>Accede a tu cuenta para continuar</p>
             </header>
 
-            {/* Formulario real:
-                - method/action son de ejemplo (puedes conectar tu API).
-                - noValidate evita validación HTML automática si manejas validación por JS. */}
-            <form className={styles.form} method="post" action="/api/login" noValidate>
-              {/* Campo correo */}
+            <form className={styles.form} onSubmit={handleSubmit} noValidate>
               <label className={styles.label} htmlFor="email">Correo electrónico</label>
               <input
                 id="email"
@@ -67,12 +92,13 @@ export default function LoginPage() {
                 placeholder="tucorreo@ejemplo.com"
                 required
                 className={styles.input}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={loading}
               />
 
-              {/* Campo contraseña con fila que contiene el input + botón para mostrar/ocultar */}
               <label className={styles.label} htmlFor="password">Contraseña</label>
               <div className={styles.passwordRow}>
-                {/* Input de contraseña — su tipo depende del estado showPassword */}
                 <input
                   id="password"
                   name="password"
@@ -80,48 +106,55 @@ export default function LoginPage() {
                   placeholder="••••••••"
                   required
                   className={styles.input}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={loading}
                 />
-                {/* Botón para alternar visibilidad.
-                    - type="button" evita que actúe como submit.
-                    - aria-label accesible según el estado. */}
                 <button
                   type="button"
                   aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
                   className={styles.toggleBtn}
                   onClick={() => setShowPassword((s) => !s)}
                 >
-                  {/* Aquí puedes poner un icono SVG o emoji; se dejó vacío para que lo estilices */}
+                  {showPassword ? "👁️" : "👁️‍🗨️"}
                 </button>
               </div>
 
-              {/* Fila con "Recuérdame" y enlace de recuperar contraseña */}
               <div className={styles.row}>
                 <label className={styles.checkbox}>
-                  <input type="checkbox" name="remember" />
+                  <input type="checkbox" name="remember" defaultChecked />
                   <span>Recuérdame</span>
                 </label>
                 <Link href="/forgot" className={styles.forgot}>¿Olvidaste tu contraseña?</Link>
               </div>
 
-              {/* Botón principal para enviar el formulario */}
-              <button type="submit" className={styles.primaryBtn}>Entrar</button>
+              {error && (
+                <p style={{ color: 'red', fontSize: '0.9rem', textAlign: 'center', marginTop: '0.5rem' }}>
+                  {error}
+                </p>
+              )}
 
-              {/* Separador para opciones sociales */}
+              <button 
+                type="submit" 
+                className={styles.primaryBtn}
+                disabled={loading}
+                style={{ opacity: loading ? 0.7 : 1 }}
+              >
+                {loading ? "Entrando..." : "Entrar"}
+              </button>
+
               <div className={styles.or}>o continuar con</div>
 
-              {/* Botones sociales (solo UI, sin integración) */}
               <div className={styles.socials}>
-                <button type="button" aria-label="Continuar con Facebook" className={styles.socialBtn}>f</button>
-                <button type="button" aria-label="Continuar con Apple" className={styles.socialBtn}></button>
-                <button type="button" aria-label="Continuar con Google" className={styles.socialBtn}>G</button>
+                <button type="button" className={styles.socialBtn}>f</button>
+                <button type="button" className={styles.socialBtn}></button>
+                <button type="button" className={styles.socialBtn}>G</button>
               </div>
 
-              {/* Enlace para registrarse */}
               <p className={styles.register}>
                 ¿No tienes cuenta? <Link href="/singup" className={styles.link}>Regístrate</Link>
               </p>
 
-              {/* NUEVO: Enlace para volver al menú principal */}
               <p className={styles.register} style={{ marginTop: '1rem' }}>
                 <Link href="/" className={styles.link}>Volver al Menú Principal</Link>
               </p>
@@ -131,6 +164,5 @@ export default function LoginPage() {
       </section>
       <Footer />
     </main>
-    
   );
 }
