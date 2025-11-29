@@ -145,10 +145,7 @@ h2 {
   font-size: 1.0rem; /* Tamaño de fuente */
   font-weight: 600; /* Negrita */
 }
-h3 {
-  font-size: 10.0rem; /* Tamaño de fuente (¡revisa si este tamaño es intencional!) */
-  font-weight: 600; /* Negrita */
-}
+
 p {
   margin: 0 0 1rem; /* Margen inferior para separar del siguiente elemento */
 }
@@ -234,6 +231,19 @@ p {
   flex-direction: column;
   justify-content: space-between;/*Empuja el contenido hacia arriba y abajo*/
   height: 100%; /* Asegura que la tarjeta ocupe todo el alto disponible */
+}
+
+.card h3{
+  margin-bottom: 0.8rem; /* Espacio debajo del título */
+}
+
+.card-text {
+  text-align: center;
+  line-height: 1.4;
+}
+
+.card .btn{
+  margin-top: 1.2rem; /* Espacio arriba del botón */
 }
 
 .card p:last-of-type {

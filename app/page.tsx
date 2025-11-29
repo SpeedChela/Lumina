@@ -54,9 +54,11 @@ export default function Home() {
                   style={{ maxWidth: "300px", width: "100%", margin: "1rem 0", borderRadius: "12px" }}
                 />
                 <h3 className="h3">Anillos</h3>
-                <p>Descubre anillos diseñados para cada momento de tu vida.
+                <div className="card-text">
+                  <p>Descubre anillos diseñados para cada momento de tu vida.
                    Desde estilos minimalistas hasta piezas con piedras que roban miradas,
                     encuentra el complemento perfecto para expresar tu personalidad.</p>
+                </div>
                 <p><Link href="/productos/anillos" className="btn">Comprar</Link></p>
               </article>
               {/* Tarjeta 2: Pulseras */}
@@ -69,9 +71,11 @@ export default function Home() {
                   style={{ maxWidth: "300px", width: "100%", margin: "1rem 0", borderRadius: "12px" }}
                 />
                 <h3 className="h3">Pulseras</h3>
-                <p>Detalles que marcan la diferencia. Pulseras versátiles y sofisticadas,
+                <div className="card-text">
+                  <p>Detalles que marcan la diferencia. Pulseras versátiles y sofisticadas,
                    ideales para llevar solas o en combinación, creando un estilo auténtico
                     y lleno de carácter.</p>
+                </div>
                 <p><Link href="/productos/pulseras" className="btn">Comprar</Link></p>
               </article>
               {/* Tarjeta 3: Collares */}
@@ -84,9 +88,11 @@ export default function Home() {
                   style={{ maxWidth: "300px", width: "100%", margin: "1rem 0", borderRadius: "12px" }}
                 />
                 <h3 className="h3">Collares</h3>
-                <p>Collares únicos que iluminan tu estilo. Desde cadenas delicadas hasta
+                <div className="card-text">
+                  <p>Collares únicos que iluminan tu estilo. Desde cadenas delicadas hasta
                    diseños con brillo impactante, cada pieza está pensada para realzar tu
                     elegancia y acompañarte en cualquier ocasión</p>
+                </div>
                 <p><Link href="/productos/collares" className="btn">Comprar</Link></p>
               </article>
             </div>
