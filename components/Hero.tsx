@@ -20,7 +20,7 @@ export default function Hero() {
                     <h2>*Diseños unicos que celebran cada momento especial</h2>
                     <h2>*Piezas elegantes con acabados perfectos para destacar</h2>
                     <h2>*Encuentra el anillo ideal para ti o para regalar a alguien especial</h2>
-                    <a><Link href="/productos/anillos" className="btn">Comprar</Link></a>
+                    <Link href="/productos/anillos" className="btn">Comprar</Link>
                 </div>
             </div>
         </section>
