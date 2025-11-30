@@ -39,8 +39,12 @@ export default function ProductsClient({ products }: { products: Product[] }) {
 
   return (
     <section>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
-        <div>
+      <header className={styles.catalogHeader}>
+        <div className={styles.logoWrap}>
+          <Image src="/Images/LogoLetra.png" alt="Lumina" width={90} height={90} className={styles.logoSmall} />
+        </div>
+
+        <div className={styles.headerCenter}>
           <p className="text-sm text-slate-400">Tienda</p>
           <h1 className="text-3xl font-bold text-white">Catálogo de productos</h1>
         </div>
@@ -55,7 +59,7 @@ export default function ProductsClient({ products }: { products: Product[] }) {
             ))}
           </select>
         </div>
-      </div>
+      </header>
 
       <div className={styles.productGrid}>
         {filtrados.map((p) => (
