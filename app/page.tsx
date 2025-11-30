@@ -45,57 +45,66 @@ export default function Home() {
           <div className="container">
             <div className="grid" role="list">
               {/* Tarjeta 1: Anillos */}
-              <article className="container section center card col-4 col-md-6 col-sm-12" role="listitem">
-                <Image
-                  src="/Images/anillos.webp"
-                  alt="Collar elegante de la colección"
-                  width={300}
-                  height={200}
-                  style={{ maxWidth: "300px", width: "100%", margin: "1rem 0", borderRadius: "12px" }}
-                />
-                <h3 className="h3">Anillos</h3>
-                <div className="card-text">
-                  <p>Descubre anillos diseñados para cada momento de tu vida.
-                   Desde estilos minimalistas hasta piezas con piedras que roban miradas,
-                    encuentra el complemento perfecto para expresar tu personalidad.</p>
-                </div>
-                <p><Link href="/productos/anillos" className="btn">Comprar</Link></p>
-              </article>
-              {/* Tarjeta 2: Pulseras */}
-              <article className="container section center card col-4 col-md-6 col-sm-12" role="listitem">
-                <Image
-                  src="/Images/pulseras.jpg"
-                  alt="Collar elegante de la colección"
-                  width={300}
-                  height={200}
-                  style={{ maxWidth: "300px", width: "100%", margin: "1rem 0", borderRadius: "12px" }}
-                />
-                <h3 className="h3">Pulseras</h3>
-                <div className="card-text">
-                  <p>Detalles que marcan la diferencia. Pulseras versátiles y sofisticadas,
-                   ideales para llevar solas o en combinación, creando un estilo auténtico
-                    y lleno de carácter.</p>
-                </div>
-                <p><Link href="/productos/pulseras" className="btn">Comprar</Link></p>
-              </article>
-              {/* Tarjeta 3: Collares */}
-              <article className="container section center card col-4 col-md-6 col-sm-12" role="listitem">
-                <Image
-                  src="/Images/collarPerla.jpg"
-                  alt="Collar elegante de la colección"
-                  width={300}
-                  height={200}
-                  style={{ maxWidth: "300px", width: "100%", margin: "1rem 0", borderRadius: "12px" }}
-                />
-                <h3 className="h3">Collares</h3>
-                <div className="card-text">
-                  <p>Collares únicos que iluminan tu estilo. Desde cadenas delicadas hasta
-                   diseños con brillo impactante, cada pieza está pensada para realzar tu
-                    elegancia y acompañarte en cualquier ocasión</p>
-                </div>
-                <p><Link href="/productos/collares" className="btn">Comprar</Link></p>
-              </article>
-            </div>
+                <article className="card" role="listitem">
+      <Image
+        src="/Images/anillos.webp"
+        alt="Anillos de colección"
+        width={300}
+        height={200}
+        style={{ borderRadius: "12px" }}
+      />
+      <h3 className="h3">Anillos</h3>
+      <div className="card-text">
+        <p>
+          Descubre anillos diseñados para cada momento de tu vida.
+          Desde estilos minimalistas hasta piezas con piedras que roban miradas,
+          encuentra el complemento perfecto para expresar tu personalidad.
+        </p>
+      </div>
+      <Link href="/productos/anillos" className="btn1">Comprar</Link>
+    </article>
+
+    <article className="card" role="listitem">
+      {/* Tarjeta 2: pulseras */}
+      <Image
+        src="/Images/pulseras.jpg"
+        alt="Pulseras elegantes"
+        width={300}
+        height={200}
+        style={{ borderRadius: "12px" }}
+      />
+      <h3 className="h3">Pulseras</h3>
+      <div className="card-text">
+        <p>
+          Detalles que marcan la diferencia. Pulseras versátiles y sofisticadas,
+          ideales para llevar solas o combinadas, creando un estilo auténtico
+          y lleno de carácter.
+        </p>
+      </div>
+      <Link href="/productos/pulseras" className="btn1">Comprar</Link>
+    </article>
+
+    <article className="card" role="listitem">
+      {/* Tarjeta 3: collares */}
+      <Image
+        src="/Images/collarPerla.jpg"
+        alt="Collares con estilo"
+        width={300}
+        height={200}
+        style={{ borderRadius: "12px" }}
+      />
+      <h3 className="h3">Collares</h3>
+      <div className="card-text">
+        <p>
+          Collares únicos que iluminan tu estilo. Desde cadenas delicadas hasta
+          diseños con brillo impactante, cada pieza está pensada para realzar tu
+          elegancia y acompañarte en cualquier ocasión.
+        </p>
+      </div>
+      <Link href="/productos/collares" className="btn1">Comprar</Link>
+    </article>
+
+  </div>
           </div>
         </section>
 

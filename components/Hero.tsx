@@ -12,14 +12,15 @@ export default function Hero() {
                         alt="Collar elegante de la colección"
                         width={800}
                         height={600}
-                        style={{ maxWidth: "300px", width: "100%", margin: "1rem 0", borderRadius: "12px" }}
+                        style={{ maxWidth: "300px", width: "100%", margin: "1rem 0", borderRadius: "20px" }}
                     />
                 </div>
                 <div className={styles.heroContent}>
                     <h1>Revisa nuestra coleccion de anillos </h1>
-                    <h2>*Diseños unicos que celebran cada momento especial</h2>
-                    <h2>*Piezas elegantes con acabados perfectos para destacar</h2>
-                    <h2>*Encuentra el anillo ideal para ti o para regalar a alguien especial</h2>
+                    <h2>✦ Diseños únicos que celebran cada momento especial</h2>
+                    <h2>✦ Piezas elegantes con acabados perfectos para destacar</h2>
+                    <h2>✦ Encuentra el anillo ideal para ti o para regalar a alguien especial</h2>
+
                     <Link href="/productos/anillos" className="btn">Comprar</Link>
                 </div>
             </div>

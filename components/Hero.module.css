@@ -2,6 +2,7 @@
 background: white;/* Fondo con degradado radial */  
 padding: 4rem 0; /* Espaciado vertical */
 border-bottom: 1px solid var(--border); /* Borde inferior con color de variable */
+border-radius: 25px;
 }
 
 .innerCentro{
