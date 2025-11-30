@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../lib/firebase-cliente";
 import styles from "./page.module.css";
 import Footer from "../../components/Footer";
@@ -14,6 +14,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [remember, setRemember] = useState(true);
   
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -31,12 +32,12 @@ export default function LoginPage() {
       const response = await fetch("/api/sessionLogin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idToken, remember: true }),
+        body: JSON.stringify({ idToken, remember }),
       });
 
       if (response.ok) {
-        router.push("/dashboard");
-        router.refresh();
+        // Redirect to home so header will reflect authenticated state
+        window.location.href = "/";
       } else {
         setError("Error al iniciar sesión en el servidor.");
       }
@@ -122,7 +123,7 @@ export default function LoginPage() {
 
               <div className={styles.row}>
                 <label className={styles.checkbox}>
-                  <input type="checkbox" name="remember" defaultChecked />
+                  <input type="checkbox" name="remember" checked={remember} onChange={(e) => setRemember(e.target.checked)} />
                   <span>Recuérdame</span>
                 </label>
                 <Link href="/forgot" className={styles.forgot}>¿Olvidaste tu contraseña?</Link>
@@ -145,10 +146,42 @@ export default function LoginPage() {
 
               <div className={styles.or}>o continuar con</div>
 
-              <div className={styles.socials}>
-                <button type="button" className={styles.socialBtn}>f</button>
-                <button type="button" className={styles.socialBtn}></button>
-                <button type="button" className={styles.socialBtn}>G</button>
+              <div style={{ paddingTop: 12 }}>
+                <button
+                  className="google-btn w-full rounded-xl border px-4 py-2 font-medium inline-flex items-center justify-center gap-2 cursor-pointer"
+                  aria-label="Continuar con Google"
+                  type="button"
+                  onClick={async () => {
+                    setLoading(true);
+                    setError(null);
+                    try {
+                      const provider = new GoogleAuthProvider();
+                      const result = await signInWithPopup(auth, provider);
+                      const idToken = await result.user.getIdToken();
+                      const res = await fetch("/api/sessionLogin", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ idToken, remember: true }),
+                      });
+                      if (res.ok) {
+                        window.location.href = "/";
+                      } else {
+                        setError("Error al crear sesión con Google.");
+                      }
+                    } catch (err) {
+                      console.error("Google login error:", err);
+                      setError("Error al iniciar sesión con Google.");
+                    } finally {
+                      setLoading(false);
+                    }
+                  }}
+                  disabled={loading}
+                >
+                  <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor" aria-hidden="true">
+                    <path d="M21.35 11.1h-9.18v2.98h5.27a4.52 4.52 0 0 1-1.95 2.96 6.06 6.06 0 0 1-3.32.96 6.06 6.06 0 0 1-4.28-1.78 6.26 6.26 0 0 1-1.76-4.4 6.25 6.25 0 0 1 1.76-4.4 6.06 6.06 0 0 1 4.28-1.78c1.46 0 2.78.5 3.82 1.33l2.1-2.1A9.3 9.3 0 0 0 12.17 2 9.1 9.1 0 0 0 5.7 4.7 9.25 9.25 0 0 0 3 11.82a9.25 9.25 0 0 0 2.7 7.12A9.1 9.1 0 0 0 12.17 22c2.49 0 4.57-.82 6.08-2.37 1.56-1.56 2.41-3.77 2.41-6.42 0-.68-.05-1.28-.31-2.11Z" />
+                  </svg>
+                  Continuar con Google
+                </button>
               </div>
 
               <p className={styles.register}>
