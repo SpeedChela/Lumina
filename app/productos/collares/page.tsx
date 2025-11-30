@@ -1,10 +1,14 @@
 import Link from "next/link";
 import { collaresData } from "@/data/collares";
 import styles from "./collares.module.css";
+import BackButtonClient from "./BackButtonClient";
 
 export default function CollaresListadoPage() {
   return (
     <main className="container section">
+      <div style={{ marginBottom: 12 }}>
+        <BackButtonClient />
+      </div>
       <h1 className={styles.listHeading}>Collares Lumina</h1>
       <div className={styles.cardsGrid}>
         {collaresData.map(c => (
