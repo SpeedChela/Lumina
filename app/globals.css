@@ -162,9 +162,23 @@ p {
   font-weight: 600; /* Negrita para el texto del botón */
   border: 1px solid transparent; /* Borde transparente para mantener tamaño */
   font-size: 0.90rem; /* Tamaño de fuente */
-  box-shadow: var(--shadow); /* Sombra usando variable */
+  /*box-shadow: var(--shadow); /* Sombra usando variable */
   text-align: center; /* Centra el texto */
   width: fit-content; /* El ancho se ajusta al contenido */
+}
+
+.btn1 {
+  display: block;               /* para que margin:auto funcione */
+  margin: 0.6rem auto;          /* centra horizontalmente */
+  padding: .75rem 1rem;
+  border-radius: 9px;
+  background: var(--brand);
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+  border: 1px solid transparent;
+  font-size: 0.90rem;
+  text-align: center;
+  width: fit-content;          /* mantiene el ancho ajustado al contenido */
 }
 
 .btnTransparente {
@@ -215,15 +229,16 @@ p {
    GRID Y TARJETAS
    ========================= */
 .grid {
-  display: grid; /* Usa CSS Grid */
-  gap: 1rem; /* Espacio entre los elementos de la cuadrícula */
-  grid-template-columns: repeat(12, 1fr); /* 12 columnas responsivas */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  justify-items: center;   /* Centra horizontalmente cada tarjeta */
+  align-items: start;      /* Alinea todo parejito */
 }
 
 .card {
   background: var(--card); /* Fondo con color de tarjeta */
   border: 1px solid var(--border); /* Borde con color de variable */
-  border-radius: var(--radius); /* Esquinas redondeadas con variable */
   padding: 1.2rem; /* Espaciado interno */
   box-shadow: var(--shadow); /* Sombra para efecto de elevación */
   text-align: center; /* Centra el texto dentro de la tarjeta */
@@ -231,6 +246,9 @@ p {
   flex-direction: column;
   justify-content: space-between;/*Empuja el contenido hacia arriba y abajo*/
   height: 100%; /* Asegura que la tarjeta ocupe todo el alto disponible */
+  border-radius: 16px;     /* Bordes bonitos */
+  max-width: 350px;
+  width: 100%;
 }
 
 .card h3{
@@ -318,7 +336,7 @@ h3 {
   gap: 1rem;
   background: var(--card);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  /*box-shadow: var(--shadow);*/
 }
 
 /* Cada pregunta */

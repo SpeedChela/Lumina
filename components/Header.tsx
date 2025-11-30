@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
 import CartButton from "../components/CartButton";
 
@@ -12,6 +12,7 @@ type Props = {
 
 export default function Header({ showLoginButton = true, variant = "public" }: Props) {
   const router = useRouter();
+  const pathname = usePathname(); // 👈 aquí obtenemos la ruta actual
   const isDashboard = variant === "dashboard";
   const [loggingOut, setLoggingOut] = useState(false);
 
@@ -59,7 +60,11 @@ export default function Header({ showLoginButton = true, variant = "public" }: P
         )}
 
         <ul className="menu">
-          {!isDashboard && <li><CartButton /></li>}
+          {/* Oculta el carrito si estoy en /singup */}
+          {!isDashboard && pathname !== "/singup" && (
+            <li><CartButton /></li>
+          )}
+
           {isDashboard ? (
             <li>
               <button
@@ -74,12 +79,20 @@ export default function Header({ showLoginButton = true, variant = "public" }: P
           ) : (
             showLoginButton && (
               <>
-                <li><Link href="/login" className="btnTransparente">Inicio de Sesión</Link></li>
-                <li><Link href="/singup" className="btnYellow">Registrarse</Link></li>
+                {/* Ocultar "Iniciar sesión" en /login y /singup */}
+                {pathname !== "/login" && pathname !== "/singup" && (
+                  <li><Link href="/login" className="btnTransparente">Iniciar sesión</Link></li>
+                )}
+
+                {/* Ocultar "Registrarse" en /singup */}
+                {pathname !== "/singup" && (
+                  <li><Link href="/singup" className="btnYellow">Registrarse</Link></li>
+                )}
               </>
             )
           )}
         </ul>
+
       </nav>
     </header>
   );
