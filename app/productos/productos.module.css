@@ -66,6 +66,30 @@
   align-items: center;
 }
 
+.catalogHeader {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding: 1rem 0;
+}
+
+.logoWrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logoSmall {
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.headerCenter {
+  text-align: center;
+}
+
 .filterSelect {
   background: #111827; /* slate-900 */
   color: #f8fafc; /* slate-50 */
