@@ -46,7 +46,7 @@ export default function ProductsClient({ products }: { products: Product[] }) {
 
         <div className={styles.headerCenter}>
           <p className="text-sm text-slate-400">Tienda</p>
-          <h1 className="text-3xl font-bold text-white">Catálogo de productos</h1>
+          <h1 className="text-3xl font-bold text-black">Catálogo de productos</h1>
         </div>
 
         <div className={styles.filterWrapper}>

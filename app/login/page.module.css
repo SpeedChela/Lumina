@@ -4,7 +4,7 @@
    Define altura mínima, color de fondo y uso de flex para apilar contenido. */
 .loginPage {
   min-height: 100vh;
-  background: #f8f6f2;
+  --background: #eeeeee;
   display: flex;
   flex-direction: column;
 }
@@ -45,7 +45,7 @@
 
 /* Recuadro que rodea el icono/diamante para darle fondo y separación. */
 .diamond {
-  background: #fbf3e6;
+  /*background: #fbf3e6;*/
   padding: 1rem;
   width: 180px;
   border-radius: 8px;

@@ -131,39 +131,39 @@ export default function SignUpPage() { // signup page component
             {/* responsive 12-column grid */}
 
             {/* Hero left: Brand Column (Replaces original Hero content) */}
-            <div className="hero-left md:col-span-5 px-6 md:px-0">
+            <div className="hero-left md:col-span-7 md:col-start- px-5 md:px-0">
               {/* Container centering the brand elements */}
-              <div className="text-center w-full flex flex-col items-center justify-center h-full">
+              <div className="flex flex-col items-center justify-center w-full text-center">
                 {/* Logo Image */}
                 <Image
                   src="/Images/LogoLetra.png"
                   alt="Lumina"
                   width={300}
                   height={120}
-                  className="mx-auto block" 
+                  className="block" 
                 />
                 {/* Slogan / tagline */}
-                <h2 className="text-xl font-semibold text-slate-800 mt-2 mb-8">
+                <h2 className="text-xl font-semibold text-slate-800 mt-2 mb-8 text-center">
                   El brillo que te distingue
                 </h2>
 
                 {/* Diamond Icon Container */}
                 {/* Uses light background from Lumina palette (fdf5e6) */}
-                <div className="bg-[#fdf5e6] p-4 w-40 rounded-xl mx-auto mt-4">
+                <div className="flex flex-col items-center justify-center w-full text-center">
                   <Image
                     src="/Images/luminalogosolo.png"
                     alt="Ícono diamante"
                     width={160}
                     height={160}
                     // Centering the image within its container
-                    className="mx-auto block"
+                    className="block"
                   />
                 </div>
               </div>
             </div>
 
             {/* Right Card Column */}
-            <div className="card-right md:col-span-7 flex justify-end px-6 md:px-0">
+            <div className="card-right md:col-span-7 flex justify-center px-6 md:px-0">
               {/* registration card container */}
               <div className="card-wrapper rounded-3xl p-8 shadow-2xl w-full max-w-2xl">
                 {/* card header */}
@@ -192,7 +192,7 @@ export default function SignUpPage() { // signup page component
                       placeholder="Tu nombre"
                       required
                       // Input with yellow focus ring
-                      className="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-slate-900 outline-none focus:ring-2 focus:ring-[#f0d58c]"
+                      className="w-full rounded-xl border-[#e6dccc] bg-[#fff3d9] px-3 py-2 text-slate-900 outline-none focus:ring-2 focus:ring-[#f0d58c]"
                     />
                   </div>
                   
@@ -207,7 +207,7 @@ export default function SignUpPage() { // signup page component
                       placeholder="tucorreo@dominio.com"
                       autoComplete="email"
                       required
-                      className="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-slate-900 outline-none focus:ring-2 focus:ring-[#f0d58c]"
+                      className="w-full rounded-xl border-[#e6dccc] bg-[#fff3d9] px-3 py-2 text-slate-900 outline-none focus:ring-2 focus:ring-[#f0d58c]"
                     />
                   </div>
                   
@@ -223,7 +223,7 @@ export default function SignUpPage() { // signup page component
                       autoComplete="new-password"
                       required
                       minLength={8}
-                      className="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-slate-900 outline-none focus:ring-2 focus:ring-[#f0d58c]"
+                      className="w-full rounded-xl border-[#e6dccc] bg-[#fff3d9] px-3 py-2 text-slate-900 outline-none focus:ring-2 focus:ring-[#f0d58c]"
                     />
                   </div>
                   
@@ -239,7 +239,7 @@ export default function SignUpPage() { // signup page component
                       autoComplete="new-password"
                       required
                       minLength={8}
-                      className="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-slate-900 outline-none focus:ring-2 focus:ring-[#f0d58c]"
+                      className="w-full rounded-xl border-[#e6dccc] bg-[#fff3d9] px-3 py-2 text-slate-900 outline-none focus:ring-2 focus:ring-[#f0d58c]"
                     />
                   </div>
                   {/* Checkbox and login/forgot link */}

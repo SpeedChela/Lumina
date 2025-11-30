@@ -206,7 +206,8 @@ p {
 .btnYellow {
   display: inline-block;
   padding: 0.55rem 0.9rem;
-  background: #f5e5b8; /* amarillo claro */
+  background: var(--brand);
+  /*background: #f5e5b8; /* amarillo claro */
   color: #1a1a1a;
   border-radius: 8px;
   font-weight: 600;
@@ -309,7 +310,7 @@ h3 {
    FOOTER
    ========================= */
 .site-footer {
-  background: var(--surface); /* Fondo del footer */
+  background: rgba(247, 238, 122, 0.3);/* Fondo del footer */
   color: var(--text); /* Color de texto */
   padding: 2rem 0; /* Espaciado vertical */
   border-top: 1px solid var(--border); /* Borde superior */

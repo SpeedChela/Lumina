@@ -8,6 +8,7 @@
   --text: #171717; /* Color de texto oscuro (foreground de globals) */
   --radius-lg: 24px;
   --radius-md: 12px;
+  --background: #eeeeee;
 }
 
 /* Reset mínimo para el root del componente */
@@ -18,7 +19,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Fondo general usando variables claras */
-  background: linear-gradient(135deg, var(--lumina-bg-a) 0%, var(--lumina-bg-b) 100%); 
+  background: var(--background);
 }
 
 /* Sección con gradiente fondo absoluto */
@@ -27,7 +28,7 @@
   position: absolute;
   inset: 0;
   /* Gradiente claro */
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(253, 245, 230, 0.6));
+  /*background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(253, 245, 230, 0.6));*/
   pointer-events: none;
   z-index: 0;
 }
@@ -40,6 +41,8 @@
   flex: 1 1 420px;
   max-width: 520px;
   padding-right: 8px;
+  justify-content: center;
+  align-items: center;
 }
 .hero-left h1 {
   font-size: 2.25rem;
@@ -83,8 +86,10 @@
 .card-right {
   flex: 1 1 480px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
 }
+
 .card-wrapper {
   width: 100%;
   max-width: 560px;
