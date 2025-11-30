@@ -2,18 +2,20 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CartButton from "../components/CartButton";
 
 type Props = {
   showLoginButton?: boolean;
   variant?: "public" | "dashboard";
+  hideNav?: boolean;
 };
 
-export default function Header({ showLoginButton = true, variant = "public" }: Props) {
+export default function Header({ showLoginButton = true, variant = "public", hideNav = false }: Props) {
   const router = useRouter();
   const isDashboard = variant === "dashboard";
   const [loggingOut, setLoggingOut] = useState(false);
+  const [user, setUser] = useState<any | null>(null);
 
   async function handleLogout() {
     setLoggingOut(true);
@@ -27,6 +29,21 @@ export default function Header({ showLoginButton = true, variant = "public" }: P
       setLoggingOut(false);
     }
   }
+
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const res = await fetch('/api/sessionUser');
+        if (!mounted) return;
+        const data = await res.json();
+        setUser(data?.user ?? null);
+      } catch (e) {
+        // ignore
+      }
+    })();
+    return () => { mounted = false };
+  }, []);
 
   return (
     <header className="site-header">
@@ -51,15 +68,17 @@ export default function Header({ showLoginButton = true, variant = "public" }: P
             <Link href="/dashboard/products" className="navLink">Productos</Link>
           </nav>
         ) : (
-          <nav className="nav-links">
-            <Link href="/productos" className="navLink">Productos</Link>
-            <Link href="#about" className="navLink">Nosotros</Link>
-            <Link href="#contact" className="navLink">Contacto</Link>
-          </nav>
+          !hideNav && (
+            <nav className="nav-links">
+              <Link href="/productos" className="navLink">Productos</Link>
+              <Link href="#about" className="navLink">Nosotros</Link>
+              <Link href="#contact" className="navLink">Contacto</Link>
+            </nav>
+          )
         )}
 
         <ul className="menu">
-          {!isDashboard && <li><CartButton /></li>}
+          {!isDashboard && user && <li><CartButton /></li>}
           {isDashboard ? (
             <li>
               <button
@@ -74,8 +93,26 @@ export default function Header({ showLoginButton = true, variant = "public" }: P
           ) : (
             showLoginButton && (
               <>
-                <li><Link href="/login" className="btnTransparente">Inicio de Sesión</Link></li>
-                <li><Link href="/singup" className="btnYellow">Registrarse</Link></li>
+                {!user ? (
+                  <>
+                    <li><Link href="/login" className="btnTransparente">Inicio de Sesión</Link></li>
+                    <li><Link href="/singup" className="btnYellow">Registrarse</Link></li>
+                  </>
+                ) : (
+                  <>
+                    <li className="navGreeting">Hola, {user.displayName ?? user.email ?? user.uid}</li>
+                    <li>
+                      <button
+                        type="button"
+                        onClick={handleLogout}
+                        disabled={loggingOut}
+                        className="btnTransparente"
+                      >
+                        {loggingOut ? "Cerrando..." : "Cerrar sesión"}
+                      </button>
+                    </li>
+                  </>
+                )}
               </>
             )
           )}

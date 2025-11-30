@@ -3,7 +3,7 @@ import React, { useState } from "react"; // import React and useState hook for l
 import "./signup.css" // <-- import custom CSS
 import Link from "next/link"; // Next.js Link component for internal navigation
 import { useRouter } from "next/navigation"; // hook for programmatic redirection in Next 13+
-import Header from "../../components/Header"; // reusable Header component
+// Header removed to show a clean signup page
 import { auth } from "../../lib/firebase-cliente"; // Firebase auth instance initialized in lib
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"; // Firebase auth functions
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"; // Google authentication provider
@@ -72,8 +72,8 @@ export default function SignUpPage() { // signup page component
       if (response.ok) {
         setIsError(false);
         setMessage("¡Cuenta creada! Entrando..."); 
-        // 5. Redirigir directamente al Dashboard
-        router.push("/dashboard");
+        // 5. Redirigir al inicio para mostrar la sesión en el header
+        router.push("/");
         router.refresh(); 
       } else {
         console.error("Error creating session cookie");
@@ -105,7 +105,8 @@ export default function SignUpPage() { // signup page component
       });
 
       if (response.ok) {
-        router.push("/dashboard");
+        // Al iniciar sesión con Google, redirigimos al inicio para que el header muestre la sesión
+        router.push("/");
         router.refresh();
       } else {
         console.error("Error sesión Google");
@@ -117,7 +118,6 @@ export default function SignUpPage() { // signup page component
 
   return (
     <div className="lumina-signup-root">
-      <Header showLoginButton={true} /> {/* header with login button controlled by prop */}
 
       <section className="lumina-section relative overflow-hidden min-h-screen"> {/* hero section occupying at least the full screen */}
         {/* background */}
