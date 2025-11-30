@@ -175,7 +175,7 @@ p {
   background: var(--brand);
   color: rgb(0, 0, 0);
   font-weight: 600;
-  border: 1px solid transparent;
+  border: 1px solid transparent; /* prueba pa ver que show xd*/
   font-size: 0.90rem;
   text-align: center;
   width: fit-content;          /* mantiene el ancho ajustado al contenido */
