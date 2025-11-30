@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { collaresData } from "@/data/collares";
 import styles from "./collares.module.css";
-import BackButtonClient from "./BackButtonClient";
+// Usar enlace directo a la página principal en lugar del botón dependiente del referrer
 
 export default function CollaresListadoPage() {
   return (
     <main className="container section">
       <div style={{ marginBottom: 12 }}>
-        <BackButtonClient />
+        <Link href="/" className={styles.backBtn}>&larr; Volver al inicio</Link>
       </div>
       <h1 className={styles.listHeading}>Collares Lumina</h1>
       <div className={styles.cardsGrid}>

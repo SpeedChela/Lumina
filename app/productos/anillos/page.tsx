@@ -5,6 +5,9 @@ import styles from "./anillos.module.css";
 export default function AnillosListadoPage() {
   return (
     <main className="container section">
+      <div style={{ marginBottom: 12 }}>
+        <Link href="/" className={styles.backBtn}>&larr; Volver al inicio</Link>
+      </div>
       <h1 className={styles.listHeading}>Anillos Lumina</h1>
       <div className={styles.cardsGrid}>
         {anillosData.map(a => (

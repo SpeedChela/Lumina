@@ -93,6 +93,22 @@
 .detailBtn:hover {
   background: #ddd;
 }
+.backBtn {
+  display: inline-block;
+  padding: .6rem 1.2rem;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f9df96 0%, #f2c94c 100%);
+  color: #111827;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 18px 30px rgba(242, 201, 76, 0.18), 0 4px 8px rgba(0,0,0,0.06);
+}
+
+.backBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 40px rgba(242, 201, 76, 0.22), 0 6px 12px rgba(0,0,0,0.08);
+}
 .buyBtn {
   background: #111;
   color: #fff;

@@ -91,37 +91,39 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: linear-gradient(180deg, #f4d77a 0%, #f2c94c 100%);
+  background: linear-gradient(180deg, #f9df96 0%, #f2c94c 100%);
   color: #111827; /* dark for contrast */
-  padding: 0.5rem 0.9rem;
-  border-radius: 10px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   text-decoration: none;
-  border: none;
+  border: 1px solid rgba(0,0,0,0.06);
   cursor: pointer;
-  transition: background 0.12s ease, transform 0.06s ease, box-shadow 0.12s ease;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  box-shadow: 0 18px 30px rgba(242, 201, 76, 0.18), 0 4px 8px rgba(0,0,0,0.06);
 }
 
 .productButton:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(242, 201, 76, 0.14), 0 2px 6px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+  box-shadow: 0 22px 40px rgba(242, 201, 76, 0.22), 0 6px 12px rgba(0,0,0,0.08);
 }
 
 .backBtn {
   display: inline-block;
-  padding: .6rem 1rem;
-  border-radius: 10px;
-  background: linear-gradient(180deg, #f4d77a 0%, #f2c94c 100%);
+  padding: .6rem 1.2rem;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f9df96 0%, #f2c94c 100%);
   color: #111827;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 8px 20px rgba(242, 201, 76, 0.14), 0 2px 6px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 18px 30px rgba(242, 201, 76, 0.18), 0 4px 8px rgba(0,0,0,0.06);
 }
 
 .backBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(242, 201, 76, 0.18), 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 22px 40px rgba(242, 201, 76, 0.22), 0 6px 12px rgba(0,0,0,0.08);
 }
 
 .productLink {

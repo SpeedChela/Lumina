@@ -40,6 +40,9 @@ const pulserasData: Pulsera[] = [
 export default function PulserasListadoPage() {
   return (
     <main className="container section">
+      <div style={{ marginBottom: 12 }}>
+        <Link href="/" className={styles.backBtn}>&larr; Volver al inicio</Link>
+      </div>
       <h1 className={styles.listHeading}>Pulseras Lumina</h1>
       <div className={styles.cardsGrid}>
         {pulserasData.map((p) => (
