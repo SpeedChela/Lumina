@@ -1,0 +1,160 @@
+:root {
+  --background: #eeeeee;
+  --text: #000000;
+  --muted: #b3ab99;
+  --brand: #f0d58c;
+  --brand--600: #f0d58c;
+  --surface: #fdf5e6;
+  --card: #ffffff;
+  --border: #ffffff;
+  --radius: 16px;
+  --container: 1100px;
+  --font-sans: 'Arial', sans-serif;
+  --shadow: none; /* Sombra eliminada */
+  --foreground: #171717;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 2.5rem 1rem;
+}
+
+/* Encabezado */
+.dashboard-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--foreground);
+}
+
+.dashboard-header .highlight {
+  color: var(--brand);
+}
+
+.dashboard-header p {
+  font-size: 0.875rem;
+  color: black;
+}
+
+/* Tarjetas */
+.card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.card p {
+  font-size: 0.875rem;
+  
+}
+
+.card .break {
+  word-break: break-word;
+  color: #f0d58c;
+}
+
+/* Estadísticas en tabla */
+.stats-table {
+  display: table;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.stat-row {
+  display: table-row;
+}
+
+.stat-cell {
+  display: table-cell;
+  padding: 1rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  vertical-align: top;
+}
+
+.stat-cell:not(:last-child) {
+  padding-right: 2rem;
+}
+
+.stat-cell .title {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.stat-cell .value {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: var(--foreground);
+}
+
+.stat-cell .note {
+  font-size: 0.75rem;
+  color: var(--brand);
+}
+
+/* Tabla de usuarios recientes */
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.user-table th,
+.user-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--muted);
+  color: var(--foreground);
+}
+
+.user-table th {
+  font-weight: bold;
+  color: var(--muted);
+}
+
+/* Acciones rápidas */
+.quick-actions a {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+}
+
+.quick-actions a:first-child {
+  background-color: var(--brand);
+  color: var(--foreground);
+}
+
+.quick-actions a:not(:first-child) {
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.quick-actions a:hover {
+  opacity: 0.9;
+}
