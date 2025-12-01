@@ -36,8 +36,13 @@ export default function LoginPage() {
       });
 
       if (response.ok) {
-        // Redirect to home so header will reflect authenticated state
-        window.location.href = "/";
+        // Verificar si es admin por email
+        const adminEmails = ["pruebaadmin@lumina.com","renatogn62@gmail.com"];
+        if (adminEmails.includes(user.email || "")) {
+          router.push("/dashboard");
+        } else {
+          router.push("/");
+        }
       } else {
         setError("Error al iniciar sesión en el servidor.");
       }
@@ -48,6 +53,37 @@ export default function LoginPage() {
       } else {
         setError("Ocurrió un error al intentar ingresar.");
       }
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleGoogleLogin() {
+    setLoading(true);
+    setError(null);
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const idToken = await result.user.getIdToken();
+      const res = await fetch("/api/sessionLogin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken, remember: true }),
+      });
+      if (res.ok) {
+        // Verificar si es admin
+        const adminEmails = ["pruebaadmin@lumina.com","renatogn62@gmail.com"];
+        if (adminEmails.includes(result.user.email || "")) {
+          router.push("/dashboard");
+        } else {
+          router.push("/");
+        }
+      } else {
+        setError("Error al crear sesión con Google.");
+      }
+    } catch (err) {
+      console.error("Google login error:", err);
+      setError("Error al iniciar sesión con Google.");
     } finally {
       setLoading(false);
     }
@@ -151,30 +187,7 @@ export default function LoginPage() {
                   className="google-btn w-full rounded-xl border px-4 py-2 font-medium inline-flex items-center justify-center gap-2 cursor-pointer"
                   aria-label="Continuar con Google"
                   type="button"
-                  onClick={async () => {
-                    setLoading(true);
-                    setError(null);
-                    try {
-                      const provider = new GoogleAuthProvider();
-                      const result = await signInWithPopup(auth, provider);
-                      const idToken = await result.user.getIdToken();
-                      const res = await fetch("/api/sessionLogin", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ idToken, remember: true }),
-                      });
-                      if (res.ok) {
-                        window.location.href = "/";
-                      } else {
-                        setError("Error al crear sesión con Google.");
-                      }
-                    } catch (err) {
-                      console.error("Google login error:", err);
-                      setError("Error al iniciar sesión con Google.");
-                    } finally {
-                      setLoading(false);
-                    }
-                  }}
+                  onClick={handleGoogleLogin}
                   disabled={loading}
                 >
                   <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor" aria-hidden="true">

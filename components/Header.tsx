@@ -50,9 +50,7 @@ export default function Header({ showLoginButton = true, variant = "public", hid
         // ignorar
       }
     })();
-    return () => {
-      mounted = false;
-    };
+    return () => { mounted = false; };
   }, []);
 
   return (
@@ -91,8 +89,20 @@ export default function Header({ showLoginButton = true, variant = "public", hid
 
         {/* MENÚ DERECHA */}
         <ul className="menu">
-          {/* Carrito (oculto en /singup) */}
-          {!isDashboard && pathname !== "/singup" && <li><CartButton /></li>}
+          {/* Carrito condicional */}
+          {!isDashboard && pathname !== "/singup" && (
+            <li>
+              {user ? (
+                <CartButton /> // usuario logueado → carrito normal
+              ) : (
+                <CartButton
+                  onClick={() => router.push("/login")} // no hay usuario → login
+                  className="cartLink"
+                  ariaLabel="Ir al carrito"
+                />
+              )}
+            </li>
+          )}
 
           {isDashboard ? (
             // DASHBOARD: solo botón de cerrar sesión
@@ -109,22 +119,24 @@ export default function Header({ showLoginButton = true, variant = "public", hid
           ) : (
             showLoginButton && (
               <>
-                {/* SI NO HAY USUARIO */}
                 {!user && (
                   <>
                     {/* Ocultar "Iniciar sesión" en /login y /singup */}
                     {pathname !== "/login" && pathname !== "/singup" && (
-                      <li><Link href="/login" className="btnTransparente">Iniciar sesión</Link></li>
+                      <li>
+                        <Link href="/login" className="btnTransparente">Iniciar sesión</Link>
+                      </li>
                     )}
 
                     {/* Ocultar "Registrarse" en /singup */}
                     {pathname !== "/singup" && (
-                      <li><Link href="/singup" className="btnYellow">Registrarse</Link></li>
+                      <li>
+                        <Link href="/singup" className="btnYellow">Registrarse</Link>
+                      </li>
                     )}
                   </>
                 )}
 
-                {/* SI SÍ HAY USUARIO */}
                 {user && (
                   <>
                     <li className="navGreeting">

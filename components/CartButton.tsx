@@ -2,12 +2,50 @@
 import Link from "next/link";
 import { useCart } from "../app/context/CartContext";
 
-export default function CartButton() {
+interface CartButtonProps {
+  onClick?: () => void;
+  className?: string;
+  ariaLabel?: string;
+}
+
+export default function CartButton({ onClick, className, ariaLabel }: CartButtonProps) {
   const { count } = useCart();
+
+  const content = (
+    <span className="relative inline-block">
+      {/* Carrito */}
+      <span className="cartIcon text-gray-700 text-xl transition-colors duration-200 group-hover:text-yellow-500 group-hover:scale-110 transform inline-block">
+        🛒
+      </span>
+
+      {/* Badge */}
+      {count > 0 && (
+        <span className="cartBadge absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold px-1 rounded-full transition-all duration-200 group-hover:bg-yellow-500">
+          {count}
+        </span>
+      )}
+    </span>
+  );
+
+  if (onClick) {
+    return (
+      <button
+        onClick={onClick}
+        className={`group inline-block cursor-pointer ${className || ""}`}
+        aria-label={ariaLabel || "Ir al carrito"}
+      >
+        {content}
+      </button>
+    );
+  }
+
   return (
-    <Link href="/cart" className="cartLink" aria-label="Ir al carrito">
-      <span className="cartIcon">🛒</span>
-      {count > 0 && <span className="cartBadge">{count}</span>}
+    <Link
+      href="/cart"
+      className={`group inline-block cursor-pointer ${className || ""}`}
+      aria-label={ariaLabel || "Ir al carrito"}
+    >
+      {content}
     </Link>
   );
 }
