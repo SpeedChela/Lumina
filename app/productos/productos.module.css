@@ -9,7 +9,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
-  align-items: start;
+  align-items: stretch; /* ensure grid items stretch to same height */
 }
 
 .productCard {
@@ -19,7 +19,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  min-height: 380px;
+  height: 100%; /* stretch to same height as grid item */
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
@@ -34,13 +34,13 @@
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 1rem;
+  height: 180px; /* fixed visual height so cards align */
 }
 
 .productImage {
   width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  object-fit: cover; /* Usa 'contain' si prefieres que se vea completo */
+  height: 100%;
+  object-fit: cover; /* ensure consistent cropping */
 }
 
 .productName {
@@ -217,6 +217,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.productDesc {
+  flex: 0 0 auto;
+  color: #666;
+  font-size: 14px;
+  margin-top: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* limit to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cardFooter {

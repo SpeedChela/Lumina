@@ -3,6 +3,7 @@ import ClientImageZoom from "@/components/ClientImageZoom";
 import { useRouter } from "next/navigation";
 import { useCart } from "../../../context/CartContext";
 import { useToast } from "../../../context/ToastContext";
+import { useState } from "react";
 
 type Collar = {
   id: string;
@@ -17,16 +18,27 @@ export default function CollarClient({ collar }: { collar: Collar }) {
   const router = useRouter();
   const { addItem } = useCart();
   const { push } = useToast();
+  const [qty, setQty] = useState<number>(1);
 
   function handleAddToCart() {
-    addItem({ id: collar.id, name: collar.nombre, price: collar.precio, image: collar.imagen, categoria: "Collares" }, 1);
+    const count = Math.max(1, Math.floor(qty));
+    addItem({ id: collar.id, name: collar.nombre, price: collar.precio, image: collar.imagen, categoria: "Collares" }, count);
     push("Añadido al carrito");
   }
 
   function handleBuyNow() {
-    addItem({ id: collar.id, name: collar.nombre, price: collar.precio, image: collar.imagen, categoria: "Collares" }, 1);
+    const count = Math.max(1, Math.floor(qty));
+    addItem({ id: collar.id, name: collar.nombre, price: collar.precio, image: collar.imagen, categoria: "Collares" }, count);
     push("Añadido al carrito");
     router.push("/carrito");
+  }
+
+  function inc() {
+    setQty((q) => Math.min(99, q + 1));
+  }
+
+  function dec() {
+    setQty((q) => Math.max(1, q - 1));
   }
 
   return (
@@ -40,13 +52,21 @@ export default function CollarClient({ collar }: { collar: Collar }) {
           ${collar.precio.toLocaleString("es-MX")}
         </p>
         <p style={{ fontSize: "1.05rem", color: "#444", lineHeight: 1.6, margin: "1rem 0 2rem" }}>{collar.descripcion}</p>
-        <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-          <button onClick={handleAddToCart} style={{ padding: "0.9rem 2.1rem", background: "#f0d58c", borderRadius: "10px", fontWeight: 600 }}>
-            Añadir al Carrito
-          </button>
-          <button onClick={handleBuyNow} style={{ padding: "0.9rem 2.1rem", background: "#111", color: "#fff", borderRadius: "10px", fontWeight: 600 }}>
-            Comprar ahora
-          </button>
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <button onClick={dec} style={{ padding: "0.5rem 0.8rem", borderRadius: 8 }}>-</button>
+            <input type="number" min={1} value={qty} onChange={(e) => setQty(Math.max(1, Number(e.target.value || 1)))} style={{ width: 64, textAlign: "center", padding: "0.4rem" }} />
+            <button onClick={inc} style={{ padding: "0.5rem 0.8rem", borderRadius: 8 }}>+</button>
+          </div>
+
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            <button onClick={handleAddToCart} style={{ padding: "0.9rem 2.1rem", background: "#f0d58c", borderRadius: "10px", fontWeight: 600 }}>
+              Añadir al Carrito
+            </button>
+            <button onClick={handleBuyNow} style={{ padding: "0.9rem 2.1rem", background: "#111", color: "#fff", borderRadius: "10px", fontWeight: 600 }}>
+              Comprar ahora
+            </button>
+          </div>
         </div>
       </div>
     </div>

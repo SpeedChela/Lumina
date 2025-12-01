@@ -90,7 +90,7 @@ export default function ProductsClient({
               <h3 className={styles.productName}>{p.nombre}</h3>
               <div className={styles.productPrice}>${p.precio.toLocaleString("es-AR")}</div>
               <div className={styles.productRating}><span className={styles.iconSmall}>⭐</span> <span className={styles.iconSmall}>{p.rating}</span></div>
-              <p style={{ color: "#666", fontSize: 14 }}>{p.descripcion}</p>
+              <p className={styles.productDesc}>{p.descripcion}</p>
             </div>
 
             <div className={styles.cardFooter}>
