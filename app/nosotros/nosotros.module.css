@@ -1,0 +1,84 @@
+.container {
+    padding: 40px 80px;
+    background-color: #f1f1f1;
+}
+
+.title {
+    text-align: center;
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.block, 
+.blockReverse {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+    margin-bottom: 50px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.blockReverse {
+    flex-direction: row-reverse;
+}
+
+
+.text h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  
+}
+
+.text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.img {
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.values {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 50px;
+}
+
+.values ul {
+    margin-top: 15px;
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+.finalBlock {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.backBtn {
+    display: inline-block;
+    background-color: #e8c168; /* dorado suave */
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: black;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s ease-in-out;
+    margin-bottom: 30px;
+}
+
+.backBtn:hover {
+    background-color: #d4af37; /* dorado más oscuro */
+}

@@ -84,7 +84,7 @@ export default function Header({ showLoginButton = true, variant = "public", hid
           !hideNav && (
             <nav className="nav-links">
               <Link href="/productos" className="navLink">Productos</Link>
-              <Link href="#about" className="navLink">Nosotros</Link>
+              <Link href="/nosotros" className="navLink">Nosotros</Link>
               <Link href="#contact" className="navLink">Contacto</Link>
             </nav>
           )
