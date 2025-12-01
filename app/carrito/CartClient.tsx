@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import { useCart } from "../context/CartContext";
+import Link from "next/link";
 
 function currency(n: number) {
   return `$${n.toLocaleString("es-AR")}`;
@@ -13,6 +14,14 @@ export default function CartClient() {
 
   const shipping = useMemo(() => (subtotal > 0 ? 200 : 0), [subtotal]);
   const total = subtotal + shipping;
+
+  function getHrefFromItem(it: { id: string; categoria?: string }) {
+    const cat = (it.categoria || "").toLowerCase();
+    if (cat.includes("anill")) return `/productos/anillos/${encodeURIComponent(it.id)}`;
+    if (cat.includes("collar")) return `/productos/collares/${encodeURIComponent(it.id)}`;
+    if (cat.includes("pulser")) return `/productos/pulseras/${encodeURIComponent(it.id)}`;
+    return `/productos/${encodeURIComponent(it.id)}`;
+  }
 
   async function handleCheckout() {
     if (items.length === 0) return alert("El carrito está vacío");
@@ -54,12 +63,18 @@ export default function CartClient() {
               <div key={it.id} style={{ display: "flex", gap: 12, alignItems: "center", background: "#fff", padding: 12, borderRadius: 8, marginBottom: 12 }}>
                 <div style={{ width: 84, height: 84, borderRadius: 8, overflow: "hidden", background: "#f6f6f6" }}>
                   {it.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={it.image} alt={it.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    <Link href={getHrefFromItem(it)}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={it.image} alt={it.name} style={{ width: "100%", height: "100%", objectFit: "cover", cursor: "pointer" }} />
+                    </Link>
                   ) : null}
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontWeight: 700 }}>{it.name}</div>
+                  <div style={{ fontWeight: 700 }}>
+                    <Link href={getHrefFromItem(it)} style={{ color: "inherit", textDecoration: "none" }}>
+                      {it.name}
+                    </Link>
+                  </div>
                   <div style={{ color: "#666", fontSize: 14 }}>{currency(it.price)}</div>
                   <div style={{ marginTop: 8, display: "flex", gap: 8, alignItems: "center" }}>
                     <button onClick={() => updateQty(it.id, it.qty - 1)}>-</button>

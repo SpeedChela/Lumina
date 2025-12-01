@@ -8,6 +8,7 @@ export type CartItem = {
   image?: string;
   color?: string;
   size?: string;
+  categoria?: string;
   qty: number;
 };
 

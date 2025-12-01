@@ -4,6 +4,7 @@ import React, { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../context/CartContext";
+import { useToast } from "../context/ToastContext";
 import styles from "./productos.module.css";
 
 export type Product = {
@@ -50,6 +51,7 @@ export default function ProductsClient({
       : products.filter((p) => p.categoria === categoria);
   }, [products, categoria]);
   const { addItem } = useCart();
+  const { push } = useToast();
 
 
   return (
@@ -81,32 +83,33 @@ export default function ProductsClient({
       <div className={styles.productGrid}>
         {filtrados.map((p) => (
           <article key={p.id} className={styles.productCard}>
-            <div className={styles.productImageWrapper}>
-              <Image src={p.imagen} alt={p.nombre} className={styles.productImage} width={320} height={240} />
+            <div className={styles.cardContent}>
+              <div className={styles.productImageWrapper}>
+                <Image src={p.imagen} alt={p.nombre} className={styles.productImage} width={320} height={240} />
+              </div>
+              <h3 className={styles.productName}>{p.nombre}</h3>
+              <div className={styles.productPrice}>${p.precio.toLocaleString("es-AR")}</div>
+              <div className={styles.productRating}><span className={styles.iconSmall}>⭐</span> <span className={styles.iconSmall}>{p.rating}</span></div>
+              <p style={{ color: "#666", fontSize: 14 }}>{p.descripcion}</p>
             </div>
-            <h3 className={styles.productName}>{p.nombre}</h3>
-            <div className={styles.productPrice}>${p.precio.toLocaleString("es-AR")}</div>
-            <div className={styles.productRating}><span className={styles.iconSmall}>⭐</span> <span className={styles.iconSmall}>{p.rating}</span></div>
-            <p style={{ color: "#666", fontSize: 14 }}>{p.descripcion}</p>
-            <div style={{ marginTop: 12, display: "flex", gap: 8 }}>
+
+            <div className={styles.cardFooter}>
               <Link href={getProductHref(p)} className={styles.productButton}>
                 Ver producto
               </Link>
-              <button
-                onClick={() =>
-                  addItem(
-                    { id: p.id, name: p.nombre, price: p.precio, image: p.imagen },
-                    1
-                  )
-                }
-                className={styles.productButton}
-                style={{ background: "#f0d58c", color: "#000" }}
-              >
-                Añadir al Carrito
-              </button>
             </div>
           </article>
         ))}
+      </div>
+
+      {/* Floating cart quick access */}
+      <div className={styles.floatingCart}>
+        <Link href="/carrito" aria-label="Ver carrito">
+          <div style={{ background: "#fff", padding: 12, borderRadius: 12, boxShadow: "0 8px 24px rgba(0,0,0,0.12)", display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ fontSize: 20 }}>🛒</span>
+            <span style={{ fontWeight: 700 }}>Ver carrito</span>
+          </div>
+        </Link>
       </div>
     </section>
   );

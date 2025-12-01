@@ -2,6 +2,7 @@
 import ClientImageZoom from "@/components/ClientImageZoom";
 import { useRouter } from "next/navigation";
 import { useCart } from "../../../context/CartContext";
+import { useToast } from "../../../context/ToastContext";
 
 type Collar = {
   id: string;
@@ -15,14 +16,17 @@ type Collar = {
 export default function CollarClient({ collar }: { collar: Collar }) {
   const router = useRouter();
   const { addItem } = useCart();
+  const { push } = useToast();
 
   function handleAddToCart() {
-    addItem({ id: collar.id, name: collar.nombre, price: collar.precio }, 1);
+    addItem({ id: collar.id, name: collar.nombre, price: collar.precio, image: collar.imagen, categoria: "Collares" }, 1);
+    push("Añadido al carrito");
   }
 
   function handleBuyNow() {
-    addItem({ id: collar.id, name: collar.nombre, price: collar.precio }, 1);
-    router.push("/pago");
+    addItem({ id: collar.id, name: collar.nombre, price: collar.precio, image: collar.imagen, categoria: "Collares" }, 1);
+    push("Añadido al carrito");
+    router.push("/carrito");
   }
 
   return (

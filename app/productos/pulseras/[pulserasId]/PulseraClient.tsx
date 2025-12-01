@@ -2,6 +2,7 @@
 import ClientImageZoom from "@/components/ClientImageZoom";
 import { useRouter } from "next/navigation";
 import { useCart } from "../../../context/CartContext";
+import { useToast } from "../../../context/ToastContext";
 
 type Pulsera = {
   id: string;
@@ -15,14 +16,17 @@ type Pulsera = {
 export default function PulseraClient({ pulsera }: { pulsera: Pulsera }) {
   const router = useRouter();
   const { addItem } = useCart();
+  const { push } = useToast();
 
   function handleAddToCart() {
-    addItem({ id: pulsera.id, name: pulsera.nombre, price: pulsera.precio }, 1);
+    addItem({ id: pulsera.id, name: pulsera.nombre, price: pulsera.precio, image: pulsera.imagen, categoria: "Pulseras" }, 1);
+    push("Añadido al carrito");
   }
 
   function handleBuyNow() {
-    addItem({ id: pulsera.id, name: pulsera.nombre, price: pulsera.precio }, 1);
-    router.push("/pago");
+    addItem({ id: pulsera.id, name: pulsera.nombre, price: pulsera.precio, image: pulsera.imagen, categoria: "Pulseras" }, 1);
+    push("Añadido al carrito");
+    router.push("/carrito");
   }
 
   return (
