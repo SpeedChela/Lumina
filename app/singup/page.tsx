@@ -69,28 +69,42 @@ export default function SignUpPage() { // signup page component
         body: JSON.stringify({ idToken, remember: true }), // Por defecto recordamos la sesión al registrarse
       });
 
-      if (response.ok) {
+        if (response.ok) {
         setIsError(false);
-        setMessage("¡Cuenta creada! Entrando..."); 
-        // 5. Redirigir al inicio para mostrar la sesión en el header
+        setMessage("¡Cuenta creada! Entrando...");
         router.push("/");
-        router.refresh(); 
+        router.refresh();
       } else {
-        console.error("Error creating session cookie");
-        // Fallback: Si falla la cookie, mandarlo al login para que intente entrar manual
-        setIsError(true);
-        setMessage("Cuenta creada, pero hubo un error de conexión. Por favor inicia sesión.");
-        setTimeout(() => router.push("/login"), 2000);
+        // No queremos error rojo ni estado de error
+        setIsError(false);
+        setMessage("Cuenta creada. Por favor inicia sesión para continuar.");
+        setTimeout(() => router.push("/login"), 1500);
       }
 
     } catch (err: unknown) {
-      console.error("Firebase signup error:", err); // logs error to console
+      console.error("Firebase signup error:", err);
+
       setIsError(true);
-      setMessage(err instanceof Error ? err.message : "Error al crear usuario."); 
-    } finally {
-      setLoading(false); // always deactivates loading indicator
+
+      // Normalizar el error desconocido a una forma con código opcional
+      type AuthErrorLike = { code?: string; message?: string };
+      const authErr = err as AuthErrorLike;
+
+      // Detectar error de correo en uso
+      if (authErr.code === "auth/email-already-in-use") {
+        setMessage("Este correo ya está registrado. Intenta iniciar sesión.");
+      } 
+      // Contraseña débil (Firebase exige 6 caracteres mínimo)
+      else if (authErr.code === "auth/weak-password") {
+        setMessage("La contraseña es demasiado débil. Usa mínimo 6 caracteres.");
+      } 
+      // Otro error cualquiera
+      else {
+        setMessage("No se pudo crear la cuenta. Intenta de nuevo.");
+      }
     }
   }
+
 
   const signupWithGoogle = async () => {
     try {
