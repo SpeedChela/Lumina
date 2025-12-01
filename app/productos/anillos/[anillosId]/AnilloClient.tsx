@@ -2,6 +2,7 @@
 import ClientImageZoom from "@/components/ClientImageZoom";
 import { useRouter } from "next/navigation";
 import { useCart } from "../../../context/CartContext";
+import { useToast } from "../../../context/ToastContext";
 
 type Anillo = {
   id: string;
@@ -15,14 +16,17 @@ type Anillo = {
 export default function AnilloClient({ anillo }: { anillo: Anillo }) {
   const router = useRouter();
   const { addItem } = useCart();
+  const { push } = useToast();
 
   function handleAddToCart() {
-    addItem({ id: anillo.id, name: anillo.nombre, price: anillo.precio }, 1);
+    addItem({ id: anillo.id, name: anillo.nombre, price: anillo.precio, image: anillo.imagen, categoria: "Anillos" }, 1);
+    push("Añadido al carrito");
   }
 
   function handleBuyNow() {
-    addItem({ id: anillo.id, name: anillo.nombre, price: anillo.precio }, 1);
-    router.push("/pago");
+    addItem({ id: anillo.id, name: anillo.nombre, price: anillo.precio, image: anillo.imagen, categoria: "Anillos" }, 1);
+    push("Añadido al carrito");
+    router.push("/carrito");
   }
 
   return (
