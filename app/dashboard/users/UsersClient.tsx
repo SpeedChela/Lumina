@@ -79,7 +79,7 @@ export default function UsersClient() {
       </section>
 
       {/* 📊 Contenido principal - La tabla dentro de la card */}
-      <section className="card">
+      <section className="cardT">
         {loading && (
           <p className="text-sm text-slate-400" style={{ color: 'var(--muted)' }}>Cargando usuarios...</p>
         )}

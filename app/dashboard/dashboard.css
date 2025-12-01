@@ -62,6 +62,21 @@ main {
   height: 100%; /* Asegura que la tarjeta de acciones rápidas ocupe el espacio disponible */
 }
 
+/* Volvemos a la normalidad */
+.cardT {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius); /* Restauramos los bordes redondeados */
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  
+  /* --- CORRECCIÓN: Quitamos position: fixed y tamaños de pantalla completa --- */
+  position: relative; /* Vuelve al flujo normal del documento */
+  width: 100%;        /* Ocupa el ancho disponible en su contenedor, no de la pantalla */
+  height: auto;       /* La altura se ajusta al contenido (la tabla) */
+  overflow: auto;     /* Si la tabla es muy ancha, permite scroll dentro de la tarjeta */
+}
+
 .card h2 {
     font-size: 1.25rem;
     font-weight: 600;
