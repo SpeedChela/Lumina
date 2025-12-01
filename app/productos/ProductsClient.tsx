@@ -22,13 +22,26 @@ function getProductHref(p: Product) {
   return `/productos/${encodeURIComponent(p.id)}`;
 }
 
-export default function ProductsClient({ products }: { products: Product[] }) {
-  const [categoria, setCategoria] = useState<string>("Todas");
+export default function ProductsClient({
+  products,
+  categoria: controlledCategoria,
+  onCategoriaChange,
+  hideHeader,
+}: {
+  products: Product[];
+  categoria?: string;
+  onCategoriaChange?: (c: string) => void;
+  hideHeader?: boolean;
+}) {
+  const [categoriaState, setCategoriaState] = useState<string>("Todas");
 
   const categorias = useMemo(() => {
     const set = new Set<string>(products.map((p) => p.categoria));
     return ["Todas", ...Array.from(set)];
   }, [products]);
+
+  const categoria = controlledCategoria ?? categoriaState;
+  const setCategoria = onCategoriaChange ?? setCategoriaState;
 
   const filtrados = useMemo(() => {
     return categoria === "Todas"
@@ -39,27 +52,29 @@ export default function ProductsClient({ products }: { products: Product[] }) {
 
   return (
     <section>
-      <header className={styles.catalogHeader}>
-        <div className={styles.logoWrap}>
-          <Image src="/Images/LogoLetra.png" alt="Lumina" width={90} height={90} className={styles.logoSmall} />
-        </div>
+      {!hideHeader && (
+        <header className={styles.catalogHeader}>
+          <div className={styles.logoWrap}>
+            <Image src="/Images/LogoLetra.png" alt="Lumina" width={90} height={90} className={styles.logoSmall} />
+          </div>
 
-        <div className={styles.headerCenter}>
-          <p className="text-sm text-slate-400">Tienda</p>
-          <h1 className="text-3xl font-bold text-black">Catálogo de productos</h1>
-        </div>
+          <div className={styles.headerCenter}>
+            <p className="text-sm text-slate-400">Tienda</p>
+            <h1 className="text-3xl font-bold text-black">Catálogo de productos</h1>
+          </div>
 
-        <div className={styles.filterWrapper}>
-          <label htmlFor="categoria" style={{ marginRight: 8, fontWeight: 600, color: "#94a3b8" }}>Filtrar:</label>
-          <select id="categoria" className={styles.filterSelect} value={categoria} onChange={(e) => setCategoria(e.target.value)}>
-            {categorias.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
-        </div>
-      </header>
+          <div className={styles.filterWrapper}>
+            <label htmlFor="categoria" style={{ marginRight: 8, fontWeight: 600, color: "#94a3b8" }}>Filtrar:</label>
+            <select id="categoria" className={styles.filterSelect} value={categoria} onChange={(e) => setCategoria(e.target.value)}>
+              {categorias.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+          </div>
+        </header>
+      )}
 
       <div className={styles.productGrid}>
         {filtrados.map((p) => (
