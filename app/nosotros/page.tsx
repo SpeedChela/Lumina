@@ -48,7 +48,7 @@ export default function Nosotros() {
             </div>
 
             <div className={styles.values}>
-                <h2>Valores que Nos Definen</h2>
+                <h2>Valores que nos definen</h2>
                 <ul>
                     <li>✦ Calidad: materiales cuidadosamente seleccionados.</li>
                     <li>✦ Elegancia: diseños que destacan con sutileza.</li>
