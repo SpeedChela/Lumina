@@ -63,6 +63,8 @@ export default function LoginPage() {
     setError(null);
     try {
       const provider = new GoogleAuthProvider();
+      // Force account selection prompt so user can choose which Google account to use
+      provider.setCustomParameters({ prompt: "select_account" });
       const result = await signInWithPopup(auth, provider);
       const idToken = await result.user.getIdToken();
       const res = await fetch("/api/sessionLogin", {
@@ -83,6 +85,12 @@ export default function LoginPage() {
       }
     } catch (err) {
       console.error("Google login error:", err);
+      // If the popup was closed by the user, don't show an error message.
+      const code = (err as any)?.code;
+      if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") {
+        // user cancelled the popup - silently abort
+        return;
+      }
       setError("Error al iniciar sesión con Google.");
     } finally {
       setLoading(false);

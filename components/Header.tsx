@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useCart } from "../app/context/CartContext";
 import CartButton from "../components/CartButton";
 
 type Props = {
@@ -24,6 +25,7 @@ export default function Header({ showLoginButton = true, variant = "public", hid
 
   const [loggingOut, setLoggingOut] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const { clear } = useCart();
 
   async function handleLogout() {
     setLoggingOut(true);
@@ -31,6 +33,8 @@ export default function Header({ showLoginButton = true, variant = "public", hid
       await fetch("/api/sessionLogout", { method: "POST" });
       // Clear local user state immediately so the header shows Login/Register
       setUser(null);
+      // Clear cart immediately on logout so badge disappears
+      try { clear(); } catch (e) { /* ignore if cart not available */ }
       // Navigate back to home and refresh server data
       router.push("/");
       router.refresh();
