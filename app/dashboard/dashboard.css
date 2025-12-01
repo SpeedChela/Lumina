@@ -195,4 +195,72 @@ main {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Se elimina el estilo .card .break ya que se eliminó la tarjeta de sesión activa */
+/* --- Tabla de Usuarios (Ajustes de estilo) --- */
+
+/* La 'card' ahora contiene la tabla */
+.content-table-container {
+    /* Si quieres que la tabla sea la única 'card' en el área principal, 
+       deja las clases de card en el TSX. Si quieres un contenedor que centre
+       la tabla, este sería el contenedor. */
+    overflow-x: auto; /* Permite desplazamiento en móviles */
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem; /* El padding es crucial para el espacio interno */
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  /* Eliminamos el margin-top si ya está dentro de una tarjeta con padding */
+}
+
+.user-table th,
+.user-table td {
+  padding: 0.75rem 0.5rem; /* Más padding horizontal para airear las columnas */
+  text-align: left;
+  border-bottom: 1px solid var(--border); 
+}
+
+.user-table th {
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 0.75rem; /* Más pequeño para que se vea como encabezado de tabla */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  /* Alineamos verticalmente para consistencia */
+  vertical-align: middle; 
+}
+
+.user-table td {
+    font-size: 0.9rem;
+    color: var(--text);
+    vertical-align: middle; 
+}
+
+/* Quitar borde inferior de la última fila */
+.user-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Estilo de fila al pasar el ratón para mejor usabilidad */
+.user-table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.02); /* Un ligero gris sobre el fondo blanco */
+    cursor: pointer;
+}
+
+/* Estilo para el método de acceso (el badge) */
+.access-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    line-height: 1;
+    /* Colores por defecto para un método destacado */
+    background-color: rgba(240, 192, 88, 0.1); /* brand con baja opacidad */
+    color: var(--brand--600);
+    border: 1px solid var(--brand--600);
+}

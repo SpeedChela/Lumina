@@ -10,7 +10,7 @@ type AdminUser = {
   disabled: boolean;
   creationTime: string;
   lastSignInTime: string | null;
-  providers: string[]; // 👈 ahora también
+  providers: string[];
 };
 
 function providerLabel(id: string): string {
@@ -47,8 +47,8 @@ export default function UsersClient() {
 
         const data = await res.json();
         setUsers(data.users ?? []);
-      } catch (e: any) {
-        setErr(e?.message ?? "Error al cargar usuarios");
+      } catch (e: unknown) {
+        setErr(e instanceof Error ? e.message : "Error al cargar usuarios");
       } finally {
         setLoading(false);
       }
@@ -59,81 +59,84 @@ export default function UsersClient() {
 
   return (
     <div className="space-y-6">
-      {/* Encabezado */}
-      <section className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-          <p className="text-sm text-slate-400">Administración</p>
-          <h1 className="text-3xl font-bold text-white">Usuarios</h1>
-          <p className="mt-2 text-sm text-slate-400">
-            Lista de usuarios desde la API /api/admin/users (Firebase Auth).
-          </p>
-        </div>
+      {/* 🚀 Encabezado - Más limpio y espaciado */}
+      <section className="dashboard-header flex flex-col gap-1">
+        <p className="text-sm text-slate-400">Administración</p>
+        <h1 className="text-3xl font-bold text-white">Usuarios</h1>
+        <p className="mt-1 text-sm text-slate-400">
+          Lista de usuarios desde la API /api/admin/users (Firebase Auth).
+        </p>
 
-        <Link
-          href="/dashboard"
-          className="text-sm text-emerald-400 hover:text-emerald-300"
-        >
-          ← Volver al dashboard
-        </Link>
+        {/* Mantenemos el link de "Volver" con el color de marca */}
+        <div className="mt-4">
+          <Link
+            href="/dashboard"
+            style={{ color: "var(--brand)", textDecoration: "none", fontSize: "0.9rem" }}
+          >
+            ← Volver al dashboard
+          </Link>
+        </div>
       </section>
 
-      {/* Contenido principal */}
-      <section className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
+      {/* 📊 Contenido principal - La tabla dentro de la card */}
+      <section className="card">
         {loading && (
-          <p className="text-sm text-slate-400">Cargando usuarios...</p>
+          <p className="text-sm text-slate-400" style={{ color: 'var(--muted)' }}>Cargando usuarios...</p>
         )}
 
         {err && <p className="mb-4 text-sm text-red-300">{err}</p>}
 
         {!loading && !err && users.length === 0 && (
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-400" style={{ color: 'var(--muted)' }}>
             No hay usuarios aún. Pídele a alguien que se registre en la app 😊
           </p>
         )}
 
         {!loading && !err && users.length > 0 && (
           <div className="overflow-x-auto">
-            <table className="min-w-full text-sm">
+            <table className="user-table">
               <thead>
-                <tr className="border-b border-slate-800 text-slate-400">
-                  <th className="py-2 pr-4 text-left font-medium">Nombre</th>
-                  <th className="py-2 pr-4 text-left font-medium">Email</th>
-                  <th className="py-2 pr-4 text-left font-medium">UID</th>
-                  <th className="py-2 pr-4 text-left font-medium">
-                    Último acceso
-                  </th>
-                  <th className="py-2 text-left font-medium">
-                    Método de acceso
-                  </th>
+                <tr>
+                  {/* Se usará el <th> del CSS: uppercase, más pequeño, color muted */}
+                  <th style={{ width: '25%' }}>Nombre</th> 
+                  <th style={{ width: '35%' }}>Email</th>
+                  <th style={{ width: '20%' }}>UID</th>
+                  <th style={{ width: '10%' }}>Último acceso</th>
+                  <th style={{ width: '10%' }}>Método de acceso</th>
                 </tr>
               </thead>
-              <tbody className="text-slate-200">
+              <tbody>
                 {users.map((u) => (
-                  <tr
-                    key={u.uid}
-                    className="border-b border-slate-800/60 hover:bg-slate-800/40"
-                  >
-                    <td className="py-2 pr-4">
+                  <tr key={u.uid}>
+                    <td>
                       {u.displayName ?? (
-                        <span className="text-slate-500 italic">
+                        <span style={{ color: 'var(--muted)', fontStyle: 'italic' }}>
                           Sin nombre
                         </span>
                       )}
                     </td>
-                    <td className="py-2 pr-4">
+                    <td>
                       {u.email ?? (
-                        <span className="text-slate-500 italic">Sin email</span>
+                        <span style={{ color: 'var(--muted)', fontStyle: 'italic' }}>Sin email</span>
                       )}
                     </td>
-                    <td className="py-2 pr-4 font-mono text-xs">{u.uid}</td>
-                    <td className="py-2 pr-4 text-xs text-slate-400">
+                    {/* El UID lo mantenemos pequeño y monoespaciado */}
+                    <td className="font-mono" style={{ fontSize: '0.7rem', color: 'var(--muted)' }}>{u.uid}</td>
+                    {/* La fecha también pequeña y con color secundario */}
+                    <td style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>
                       {u.lastSignInTime
-                        ? new Date(u.lastSignInTime).toLocaleString("es-MX")
+                        ? new Date(u.lastSignInTime).toLocaleDateString("es-MX", {
+                            year: 'numeric',
+                            month: 'numeric',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                          })
                         : "Nunca"}
                     </td>
-                    <td className="py-2">
+                    <td>
                       {u.providers.length === 0 ? (
-                        <span className="inline-flex items-center rounded-full bg-slate-700/40 px-2 py-1 text-[11px] font-medium text-slate-200 border border-slate-600/60">
+                        <span className="access-badge" style={{ backgroundColor: 'var(--border)', color: 'var(--muted)', borderColor: 'var(--border)' }}>
                           Desconocido
                         </span>
                       ) : (
@@ -141,7 +144,7 @@ export default function UsersClient() {
                           {u.providers.map((p) => (
                             <span
                               key={p}
-                              className="inline-flex items-center px-2 py-1 text-[11px] font-medium text-emerald-300"
+                              className="access-badge" // Usamos la nueva clase de badge
                             >
                               {providerLabel(p)}
                             </span>
