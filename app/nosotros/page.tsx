@@ -50,10 +50,10 @@ export default function Nosotros() {
             <div className={styles.values}>
                 <h2>Valores que Nos Definen</h2>
                 <ul>
-                    <li>✨ Calidad: materiales cuidadosamente seleccionados.</li>
-                    <li>✨ Elegancia: diseños que destacan con sutileza.</li>
-                    <li>✨ Confianza: piezas hechas para durar.</li>
-                    <li>✨ Pasión: amor por la joyería fina.</li>
+                    <li>✦ Calidad: materiales cuidadosamente seleccionados.</li>
+                    <li>✦ Elegancia: diseños que destacan con sutileza.</li>
+                    <li>✦ Confianza: piezas hechas para durar.</li>
+                    <li>✦ Pasión: amor por la joyería fina.</li>
                 </ul>
             </div>
 
