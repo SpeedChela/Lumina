@@ -222,7 +222,7 @@ export default function PagoPage() {
               <div className="flex items-center justify-center gap-4 pt-4">
                 <button
                   type="button"
-                  onClick={() => router.push("/cart")}
+                  onClick={() => router.push("/carrito")}
                   className="border border-[#d6c9b0] rounded-lg px-8 py-3 text-base font-medium tracking-wide hover:bg-[#f5efe2] transition-colors"
                 >
                   ATRÁS

@@ -41,7 +41,7 @@ export default function CartButton({ onClick, className, ariaLabel }: CartButton
 
   return (
     <Link
-      href="/cart"
+      href="/carrito"
       className={`group inline-block cursor-pointer ${className || ""}`}
       aria-label={ariaLabel || "Ir al carrito"}
     >

@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useCart } from "../context/CartContext";
 import styles from "./productos.module.css";
 
 export type Product = {
@@ -48,6 +49,7 @@ export default function ProductsClient({
       ? products
       : products.filter((p) => p.categoria === categoria);
   }, [products, categoria]);
+  const { addItem } = useCart();
 
 
   return (
@@ -86,10 +88,22 @@ export default function ProductsClient({
             <div className={styles.productPrice}>${p.precio.toLocaleString("es-AR")}</div>
             <div className={styles.productRating}><span className={styles.iconSmall}>⭐</span> <span className={styles.iconSmall}>{p.rating}</span></div>
             <p style={{ color: "#666", fontSize: 14 }}>{p.descripcion}</p>
-            <div style={{ marginTop: 12 }}>
+            <div style={{ marginTop: 12, display: "flex", gap: 8 }}>
               <Link href={getProductHref(p)} className={styles.productButton}>
                 Ver producto
               </Link>
+              <button
+                onClick={() =>
+                  addItem(
+                    { id: p.id, name: p.nombre, price: p.precio, image: p.imagen },
+                    1
+                  )
+                }
+                className={styles.productButton}
+                style={{ background: "#f0d58c", color: "#000" }}
+              >
+                Añadir al Carrito
+              </button>
             </div>
           </article>
         ))}

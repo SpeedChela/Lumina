@@ -29,6 +29,9 @@ export default function Header({ showLoginButton = true, variant = "public", hid
     setLoggingOut(true);
     try {
       await fetch("/api/sessionLogout", { method: "POST" });
+      // Clear local user state immediately so the header shows Login/Register
+      setUser(null);
+      // Navigate back to home and refresh server data
       router.push("/");
       router.refresh();
     } catch (e) {

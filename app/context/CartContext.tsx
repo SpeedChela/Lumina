@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 export type CartItem = {
   id: string;
@@ -27,21 +27,150 @@ const CartContext = createContext<CartContextType | null>(null);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [userId, setUserId] = useState<string | null>(null);
+  const prevUserRef = useRef<string | null | undefined>(undefined);
 
-  // Cargar desde localStorage
+  // Helper to compute storage key per user (guest vs user)
+  const storageKey = (uid?: string | null) => (uid ? `lumina:cart:${uid}` : `lumina:cart:guest`);
+
+  // Fetch session user to determine storage key
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem("lumina:cart");
-      if (raw) setItems(JSON.parse(raw));
-    } catch {}
+    let mounted = true;
+    (async () => {
+      try {
+        const res = await fetch("/api/sessionUser");
+        const data = await res.json();
+        if (!mounted) return;
+        setUserId(data?.user?.uid ?? null);
+      } catch {
+        if (!mounted) return;
+        setUserId(null);
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
   }, []);
 
-  // Guardar en localStorage
+  // Load cart for current userId (runs on mount and when userId changes)
   useEffect(() => {
     try {
-      localStorage.setItem("lumina:cart", JSON.stringify(items));
+      const raw = localStorage.getItem(storageKey(userId));
+      if (raw) setItems(JSON.parse(raw));
+      else setItems([]);
+    } catch {
+      setItems([]);
+    }
+  }, [userId]);
+
+  // When userId changes, migrate guest cart into user cart (login) or move user cart to guest (logout)
+  useEffect(() => {
+    const prev = prevUserRef.current;
+    // guest -> user (merge)
+    if (!prev && userId) {
+      try {
+        const guestRaw = localStorage.getItem(storageKey(null)) || "[]";
+        const userRaw = localStorage.getItem(storageKey(userId)) || "[]";
+        const guest = JSON.parse(guestRaw) as CartItem[];
+        const user = JSON.parse(userRaw) as CartItem[];
+
+        const merged = [...user];
+        guest.forEach((g) => {
+          const i = merged.findIndex((p) => sameVariant(p, g));
+          if (i >= 0) merged[i] = { ...merged[i], qty: (merged[i].qty || 0) + (g.qty || 0) };
+          else merged.push({ ...g });
+        });
+        localStorage.setItem(storageKey(userId), JSON.stringify(merged));
+        localStorage.removeItem(storageKey(null));
+        setItems(merged as any);
+        // Persist merged cart to server
+        (async () => {
+          try {
+            await fetch("/api/cart", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ items: merged }),
+            });
+          } catch (e) {
+            // ignore server errors for now
+          }
+        })();
+      } catch {
+        // ignore
+      }
+    }
+
+    // user -> guest (logout): save current user cart to guest key
+    if (prev && !userId) {
+      try {
+        const userRaw = localStorage.getItem(storageKey(prev)) || "[]";
+        localStorage.setItem(storageKey(null), userRaw);
+        setItems(JSON.parse(userRaw));
+      } catch {}
+    }
+
+    prevUserRef.current = userId;
+  }, [userId]);
+
+  // When a user logs in, try to sync with server-side cart and merge
+  useEffect(() => {
+    if (!userId) return;
+    let mounted = true;
+    (async () => {
+      try {
+        const res = await fetch("/api/cart");
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!mounted) return;
+        const serverItems = (data?.items as CartItem[]) || [];
+        // Merge serverItems with current local items (server wins duplicates by summing)
+        const localRaw = localStorage.getItem(storageKey(userId)) || "[]";
+        const localItems = JSON.parse(localRaw) as CartItem[];
+        const merged = [...serverItems];
+        localItems.forEach((g) => {
+          const i = merged.findIndex((p) => sameVariant(p, g));
+          if (i >= 0) merged[i] = { ...merged[i], qty: (merged[i].qty || 0) + (g.qty || 0) };
+          else merged.push({ ...g });
+        });
+        localStorage.setItem(storageKey(userId), JSON.stringify(merged));
+        setItems(merged);
+        // Persist merged back to server to ensure server has the union
+        try {
+          await fetch("/api/cart", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ items: merged }),
+          });
+        } catch {}
+      } catch (e) {
+        // ignore
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, [userId]);
+
+  // Sync local changes to server when user is logged in
+  useEffect(() => {
+    if (!userId) return;
+    try {
+      (async () => {
+        await fetch("/api/cart", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ items }),
+        });
+      })();
     } catch {}
-  }, [items]);
+  }, [items, userId]);
+
+  // Guardar en localStorage en la key correspondiente
+  useEffect(() => {
+    try {
+      localStorage.setItem(storageKey(userId), JSON.stringify(items));
+    } catch {}
+  }, [items, userId]);
 
   const sameVariant = (a: AddItemInput | CartItem, b: AddItemInput | CartItem) =>
     a.id === b.id && a.color === b.color && a.size === b.size;
