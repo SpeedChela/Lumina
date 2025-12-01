@@ -104,7 +104,7 @@ export default function LoginPage() {
             <h2 className={styles.tagline}>El brillo que te distingue</h2>
             <div className={styles.diamond}>
               <Image
-                src="/Images/luminalogosolo.png"
+                src="/Images/luminalogin.png"
                 alt="Ícono diamante"
                 width={160}
                 height={160}
