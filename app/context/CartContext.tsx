@@ -100,7 +100,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         const mergedNormalized = normalizeItems(merged as CartItem[]);
         localStorage.setItem(storageKey(userId), JSON.stringify(mergedNormalized));
         localStorage.removeItem(storageKey(null));
-        setItems(mergedNormalized as any);
+        setItems(mergedNormalized);
         // Persist merged cart to server
         (async () => {
           try {
@@ -109,7 +109,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ items: merged }),
             });
-          } catch (e) {
+          } catch {
             // ignore server errors for now
           }
         })();
@@ -161,7 +161,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             body: JSON.stringify({ items: merged }),
           });
         } catch {}
-      } catch (e) {
+      } catch {
         // ignore
       }
     })();

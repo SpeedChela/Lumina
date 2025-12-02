@@ -10,7 +10,7 @@ function currency(n: number) {
 }
 
 export default function CartClient() {
-  const { items, updateQty, removeItem, clear, subtotal } = useCart();
+  const { items, updateQty, removeItem, subtotal } = useCart();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 

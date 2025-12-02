@@ -11,11 +11,12 @@ export async function GET() {
     if (!token) return NextResponse.json({ user: null });
 
     const decoded = await adminAuth.verifySessionCookie(token, true);
+    const d = decoded as Record<string, unknown>;
     const user = {
       uid: decoded.uid,
-      email: (decoded as any).email,
-      displayName: (decoded as any).displayName || (decoded as any).name,
-      picture: (decoded as any).picture,
+      email: typeof d.email === "string" ? d.email : undefined,
+      displayName: (typeof d.displayName === "string" && d.displayName) || (typeof d.name === "string" ? d.name : undefined),
+      picture: typeof d.picture === "string" ? d.picture : undefined,
     };
     return NextResponse.json({ user });
   } catch (e) {
