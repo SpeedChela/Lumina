@@ -12,8 +12,9 @@ export async function generateStaticParams() {
 // Si quieres permitir ids fuera del array quita generateStaticParams y añade:
 // export const dynamic = "force-dynamic";
 
-export default function CollarDetallePage({ params }: { params: { collaresId: string } }) {
-  const collar = collaresData.find(c => c.id === params.collaresId);
+export default async function CollarDetallePage({ params }: { params: { collaresId: string } }) {
+  const { collaresId } = await params as { collaresId: string };
+  const collar = collaresData.find(c => c.id === collaresId);
   if (!collar) notFound();
   return (
     <>

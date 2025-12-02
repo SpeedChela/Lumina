@@ -11,8 +11,9 @@ export async function generateStaticParams() {
 
 // Para ids dinámicos elimina la función y usa: export const dynamic = "force-dynamic";
 
-export default function AnilloDetallePage({ params }: { params: { anillosId: string } }) {
-  const anillo = anillosData.find(a => a.id === params.anillosId);
+export default async function AnilloDetallePage({ params }: { params: { anillosId: string } }) {
+  const { anillosId } = await params as { anillosId: string };
+  const anillo = anillosData.find(a => a.id === anillosId);
   if (!anillo) notFound();
   return (
     <>

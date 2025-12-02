@@ -23,8 +23,9 @@ export async function generateStaticParams() {
   return pulserasData.map(p => ({ pulserasId: p.id }));
 }
 
-export default function PulseraDetallePage({ params }: { params: { pulserasId: string } }) {
-  const pulsera = pulserasData.find(p => p.id === params.pulserasId);
+export default async function PulseraDetallePage({ params }: { params: { pulserasId: string } }) {
+  const { pulserasId } = await params as { pulserasId: string };
+  const pulsera = pulserasData.find(p => p.id === pulserasId);
   if (!pulsera) notFound();
 
   return (
