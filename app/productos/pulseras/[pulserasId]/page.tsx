@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import React, { Suspense } from "react";
 import PulseraClient from "./PulseraClient";
 
 type Pulsera = {
@@ -33,7 +33,9 @@ export default async function PulseraDetallePage({ params }: { params: { pulsera
       <Header showLoginButton={true} />
       <main className="container section">
         {/* Back link handled inside the client component using `?from=` query param */}
+        <Suspense fallback={<div />}>
         <PulseraClient pulsera={pulsera} />
+        </Suspense>
       </main>
       <Footer />
     </>

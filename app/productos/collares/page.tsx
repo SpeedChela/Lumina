@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { collaresData } from "@/data/collares";
 import styles from "./collares.module.css";
 import Header from "@/components/Header";
@@ -18,7 +19,7 @@ export default function CollaresListadoPage() {
         {collaresData.map(c => (
           <div key={c.id} className={styles.productCard}>
             <div className={styles.imageWrap}>
-              <img src={c.imagen} alt={c.nombre} className={styles.cardImage} />
+              <Image src={c.imagen} alt={c.nombre} className={styles.cardImage} width={320} height={240} />
             </div>
             <div className={styles.cardBody}>
               <h2 className={styles.cardTitle}>{c.nombre}</h2>

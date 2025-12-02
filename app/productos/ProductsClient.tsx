@@ -3,8 +3,9 @@
 import React, { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useCart } from "../context/CartContext";
-import { useToast } from "../context/ToastContext";
+// keep cart/toast hooks available if needed later (not used in list view)
+// import { useCart } from "../context/CartContext";
+// import { useToast } from "../context/ToastContext";
 import styles from "./productos.module.css";
 
 export type Product = {
@@ -51,8 +52,10 @@ export default function ProductsClient({
       ? products
       : products.filter((p) => p.categoria === categoria);
   }, [products, categoria]);
-  const { addItem } = useCart();
-  const { push } = useToast();
+  // no direct add-to-cart or toast calls in the list view currently
+  // keep hooks available here if needed later
+  // const { addItem } = useCart();
+  // const { push } = useToast();
 
 
   return (

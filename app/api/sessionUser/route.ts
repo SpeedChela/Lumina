@@ -19,7 +19,7 @@ export async function GET() {
       picture: typeof d.picture === "string" ? d.picture : undefined,
     };
     return NextResponse.json({ user });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ user: null });
   }
 }

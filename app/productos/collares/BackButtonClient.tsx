@@ -24,7 +24,7 @@ export default function BackButtonClient() {
       }
 
       setHref(resolved);
-    } catch (e) {
+    } catch {
       setHref("/productos");
     }
   }, []);

@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Link from "next/link";
+import React, { Suspense } from "react";
 import { notFound } from "next/navigation";
 import AnilloClient from "./AnilloClient";
 import { anillosData } from "@/data/anillos";
@@ -20,7 +20,9 @@ export default async function AnilloDetallePage({ params }: { params: { anillosI
       <Header showLoginButton={true} />
       <main className="container section">
         {/* Back link handled inside the client component using `?from=` query param */}
-        <AnilloClient anillo={anillo} />
+        <Suspense fallback={<div />}> 
+          <AnilloClient anillo={anillo} />
+        </Suspense>
       </main>
       <Footer />
     </>

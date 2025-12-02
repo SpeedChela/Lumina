@@ -24,7 +24,10 @@ export async function POST(req: Request) {
     // Do not force an API version here — let the installed Stripe library
     // use its default version. Forcing an unsupported version caused
     // `Invalid Stripe API version` errors in some environments.
-    const stripe = new Stripe(secret);
+    // Stripe constructor requires a config argument in the TypeScript types.
+    // Provide an empty config cast to `Stripe.StripeConfig` so runtime behavior
+    // remains unchanged while satisfying the type checker.
+    const stripe = new Stripe(secret as string, {} as Stripe.StripeConfig);
 
     const line_items = cart.map((it: unknown) => {
       const unitPrice = Math.round(getNumber(it, ["price", "precio"]) * 100);

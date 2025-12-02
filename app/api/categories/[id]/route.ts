@@ -6,16 +6,13 @@ import {
   CategoryInput,
 } from "@/lib/admin-categories";
 
-type RouteParams = {
-  params: { id: string };
-};
-
-export async function PUT(req: Request, { params }: RouteParams) {
+export async function PUT(req: Request, context: { params: { id: string } | Promise<{ id: string }> }) {
   const user = await getServerUser();
   if (!user) {
     return NextResponse.json({ error: "No autorizado" }, { status: 401 });
   }
 
+  const params = (await context.params) as { id: string };
   const { id } = params;
 
   try {
@@ -44,12 +41,13 @@ export async function PUT(req: Request, { params }: RouteParams) {
   }
 }
 
-export async function DELETE(_req: Request, { params }: RouteParams) {
+export async function DELETE(_req: Request, context: { params: { id: string } | Promise<{ id: string }> }) {
   const user = await getServerUser();
   if (!user) {
     return NextResponse.json({ error: "No autorizado" }, { status: 401 });
   }
 
+  const params = (await context.params) as { id: string };
   const { id } = params;
 
   try {

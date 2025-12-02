@@ -49,6 +49,9 @@ export default function ClientImageZoom({ src, alt = '', zoom = 2, className, st
         ...style
       }}
     >
+      {/* `next/image` cannot be used here because we need a real <img> element
+          with a mutable ref for the zoom transform. Disable the rule for this element. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         ref={imgRef}
         src={src}

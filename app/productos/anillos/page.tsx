@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { anillosData } from "@/data/anillos";
 import styles from "./anillos.module.css";
 import Header from "@/components/Header";
@@ -17,7 +18,7 @@ export default function AnillosListadoPage() {
         {anillosData.map(a => (
           <div key={a.id} className={styles.productCard}>
             <div className={styles.imageWrap}>
-              <img src={a.imagen} alt={a.nombre} className={styles.cardImage} />
+              <Image src={a.imagen} alt={a.nombre} className={styles.cardImage} width={320} height={240} />
             </div>
             <div className={styles.cardBody}>
               <h2 className={styles.cardTitle}>{a.nombre}</h2>

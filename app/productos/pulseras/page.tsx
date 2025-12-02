@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./pulseras.module.css";
 import Header from "@/components/Header";
 
@@ -52,7 +53,7 @@ export default function PulserasListadoPage() {
         {pulserasData.map((p) => (
           <div key={p.id} className={styles.productCard}>
             <div className={styles.imageWrap}>
-              <img src={p.imagen} alt={p.nombre} className={styles.cardImage} />
+              <Image src={p.imagen} alt={p.nombre} className={styles.cardImage} width={320} height={240} />
             </div>
             <div className={styles.cardBody}>
               <h2 className={styles.cardTitle}>{p.nombre}</h2>

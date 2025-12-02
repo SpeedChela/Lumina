@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Link from "next/link";
+import React, { Suspense } from "react";
 import { notFound } from "next/navigation";
 import CollarClient from "./CollarClient";
 import { collaresData } from "@/data/collares";
@@ -21,7 +21,9 @@ export default async function CollarDetallePage({ params }: { params: { collares
       <Header showLoginButton={true} />
       <main className="container section">
         {/* Back link handled inside the client component using `?from=` query param */}
-        <CollarClient collar={collar} />
+        <Suspense fallback={<div />}>
+          <CollarClient collar={collar} />
+        </Suspense>
       </main>
       <Footer />
     </>

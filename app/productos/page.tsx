@@ -11,12 +11,12 @@ import { collaresData } from "../../data/collares";
 import { pulserasData } from "../../data/pulseras";
 
 export default function Page() {
-	const anillos: Product[] = anillosData.map((a) => ({ ...a, categoria: "Anillos" }));
-	const collares: Product[] = collaresData.map((c) => ({ ...c, categoria: "Collares" }));
-
-	const pulseras: Product[] = pulserasData.map((p) => ({ ...p, categoria: "Pulseras" }));
-
-	const products: Product[] = [...anillos, ...collares, ...pulseras];
+	const products: Product[] = useMemo(() => {
+		const anillos: Product[] = anillosData.map((a) => ({ ...a, categoria: "Anillos" }));
+		const collares: Product[] = collaresData.map((c) => ({ ...c, categoria: "Collares" }));
+		const pulseras: Product[] = pulserasData.map((p) => ({ ...p, categoria: "Pulseras" }));
+		return [...anillos, ...collares, ...pulseras];
+	}, []);
 
 	const categorias = useMemo(() => {
 		const set = new Set<string>(products.map((p) => p.categoria));
