@@ -68,7 +68,7 @@ export default function PulserasListadoPage() {
                 ))}
               </div>
               <div className={styles.cardActions}>
-                <Link href={`/productos/pulseras/${p.id}`} className={styles.detailBtn}>DETALLE</Link>
+                <Link href={`/productos/pulseras/${p.id}?from=pulseras`} className={styles.detailBtn}>DETALLE</Link>
               </div>
             </div>
           </div>

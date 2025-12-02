@@ -34,6 +34,22 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   // Helper to compute storage key per user (guest vs user)
   const storageKey = (uid?: string | null) => (uid ? `lumina:cart:${uid}` : `lumina:cart:guest`);
 
+  // Normalize items: merge duplicates by variant (id + color + size) and sum qty
+  const normalizeItems = (arr: CartItem[] | undefined | null) => {
+    if (!Array.isArray(arr)) return [] as CartItem[];
+    const map = new Map<string, CartItem>();
+    for (const it of arr) {
+      const key = `${it.id}::${it.color ?? ""}::${it.size ?? ""}`;
+      const existing = map.get(key);
+      if (existing) {
+        existing.qty = (existing.qty || 0) + (it.qty || 0);
+      } else {
+        map.set(key, { ...it, qty: it.qty || 0 });
+      }
+    }
+    return Array.from(map.values());
+  };
+
   // Fetch session user to determine storage key
   useEffect(() => {
     let mounted = true;
@@ -57,7 +73,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(storageKey(userId));
-      if (raw) setItems(JSON.parse(raw));
+      if (raw) setItems(normalizeItems(JSON.parse(raw)));
       else setItems([]);
     } catch {
       setItems([]);
@@ -81,9 +97,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           if (i >= 0) merged[i] = { ...merged[i], qty: (merged[i].qty || 0) + (g.qty || 0) };
           else merged.push({ ...g });
         });
-        localStorage.setItem(storageKey(userId), JSON.stringify(merged));
+        const mergedNormalized = normalizeItems(merged as CartItem[]);
+        localStorage.setItem(storageKey(userId), JSON.stringify(mergedNormalized));
         localStorage.removeItem(storageKey(null));
-        setItems(merged as any);
+        setItems(mergedNormalized as any);
         // Persist merged cart to server
         (async () => {
           try {
@@ -106,7 +123,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       try {
         const userRaw = localStorage.getItem(storageKey(prev)) || "[]";
         localStorage.setItem(storageKey(null), userRaw);
-        setItems(JSON.parse(userRaw));
+        setItems(normalizeItems(JSON.parse(userRaw)));
       } catch {}
     }
 
@@ -133,8 +150,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           if (i >= 0) merged[i] = { ...merged[i], qty: (merged[i].qty || 0) + (g.qty || 0) };
           else merged.push({ ...g });
         });
-        localStorage.setItem(storageKey(userId), JSON.stringify(merged));
-        setItems(merged);
+        const mergedNormalized = normalizeItems(merged as CartItem[]);
+        localStorage.setItem(storageKey(userId), JSON.stringify(mergedNormalized));
+        setItems(mergedNormalized);
         // Persist merged back to server to ensure server has the union
         try {
           await fetch("/api/cart", {
@@ -160,7 +178,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         await fetch("/api/cart", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ items }),
+          body: JSON.stringify({ items: normalizeItems(items) }),
         });
       })();
     } catch {}
@@ -169,9 +187,19 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   // Guardar en localStorage en la key correspondiente
   useEffect(() => {
     try {
-      localStorage.setItem(storageKey(userId), JSON.stringify(items));
+      localStorage.setItem(storageKey(userId), JSON.stringify(normalizeItems(items)));
     } catch {}
   }, [items, userId]);
+
+  // Ensure items are normalized (deduplicated) after any change coming from actions
+  useEffect(() => {
+    const normalized = normalizeItems(items);
+    const a = JSON.stringify(normalized);
+    const b = JSON.stringify(items);
+    if (a !== b) {
+      setItems(normalized);
+    }
+  }, [items]);
 
   const sameVariant = (a: AddItemInput | CartItem, b: AddItemInput | CartItem) =>
     a.id === b.id && a.color === b.color && a.size === b.size;

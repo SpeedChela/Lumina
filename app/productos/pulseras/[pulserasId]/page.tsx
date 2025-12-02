@@ -32,12 +32,7 @@ export default async function PulseraDetallePage({ params }: { params: { pulsera
     <>
       <Header showLoginButton={true} />
       <main className="container section">
-        <Link
-          href="/productos/pulseras"
-          style={{ display: "inline-block", margin: "0 0 2rem", color: "#555", textDecoration: "none" }}
-        >
-          &larr; Volver a todas las pulseras
-        </Link>
+        {/* Back link handled inside the client component using `?from=` query param */}
         <PulseraClient pulsera={pulsera} />
       </main>
       <Footer />
