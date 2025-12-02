@@ -2,7 +2,8 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="site-footer section">
+    // Agregamos id="contacto" aquí para que el enlace del Header funcione
+    <footer id="contacto" className="site-footer section">
       <div className="footer-flex container">
         {/* Logo en el footer alineado a la izquierda */}
         <div className="footer-logo">

@@ -5,6 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useCart } from "../app/context/CartContext";
 import CartButton from "../components/CartButton";
+// import Footer from "../components/Footer";
 
 type Props = {
   showLoginButton?: boolean;
@@ -82,14 +83,13 @@ export default function Header({ showLoginButton = true, variant = "public", hid
             <Link href="/dashboard" className="navLink">Panel</Link>
             <Link href="/dashboard/users" className="navLink">Usuarios</Link>
             <Link href="/dashboard/categories" className="navLink">Categorías</Link>
-            <Link href="/dashboard/products" className="navLink">Productos</Link>
           </nav>
         ) : (
           !hideNav && (
             <nav className="nav-links">
               <Link href="/productos" className="navLink">Productos</Link>
               <Link href="/nosotros" className="navLink">Nosotros</Link>
-              <Link href="#contact" className="navLink">Contacto</Link>
+              <Link href="#contacto" className="navLink">Contacto</Link>
             </nav>
           )
         )}

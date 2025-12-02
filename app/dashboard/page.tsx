@@ -83,7 +83,7 @@ export default async function DashboardPage() {
           {/* Acciones rápidas */}
           <div className="card quick-actions">
             <h2>⚡ Acciones rápidas</h2> {/* Se añade icono */}
-            <p>Atajos para lo que usarás más en clase.</p>
+            <p>Lo más usado.</p>
             {/* Se añade icono de lista a los enlaces */}
             <Link href="/dashboard/users">
                 <span>➕</span> Ver usuarios
