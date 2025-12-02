@@ -29,7 +29,7 @@ export default function CollaresListadoPage() {
                 ))}
               </div>
               <div className={styles.cardActions}>
-                <Link href={`/productos/collares/${c.id}`} className={styles.detailBtn}>DETALLE</Link>
+                <Link href={`/productos/collares/${c.id}?from=collares`} className={styles.detailBtn}>DETALLE</Link>
               </div>
             </div>
           </div>

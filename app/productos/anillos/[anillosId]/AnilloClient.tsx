@@ -1,6 +1,6 @@
 "use client";
 import ClientImageZoom from "@/components/ClientImageZoom";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCart } from "../../../context/CartContext";
 import { useToast } from "../../../context/ToastContext";
 import { useState } from "react";
@@ -16,9 +16,19 @@ type Anillo = {
 
 export default function AnilloClient({ anillo }: { anillo: Anillo }) {
   const router = useRouter();
+  const search = useSearchParams();
   const { addItem } = useCart();
   const { push } = useToast();
   const [qty, setQty] = useState<number>(1);
+
+  function handleBack() {
+    const from = search?.get("from") || "anillos";
+    if (from === "productos") return router.push("/productos");
+    if (from === "pulseras") return router.push("/productos/pulseras");
+    if (from === "collares") return router.push("/productos/collares");
+    if (from === "anillos") return router.push("/productos/anillos");
+    router.push("/productos/anillos");
+  }
 
   function handleAddToCart() {
     const count = Math.max(1, Math.floor(qty));
@@ -42,6 +52,10 @@ export default function AnilloClient({ anillo }: { anillo: Anillo }) {
   }
 
   return (
+    <div>
+      <div style={{ marginBottom: 12 }}>
+        <button onClick={handleBack} style={{ background: "none", border: "none", color: "#555", cursor: "pointer", padding: 0 }}>&larr; Volver</button>
+      </div>
     <div style={{ display: "flex", gap: "2.5rem", flexWrap: "wrap" }}>
       <div style={{ flex: "1 1 400px", background: "#f8f8f8", borderRadius: "12px", overflow: "hidden" }}>
         <ClientImageZoom src={anillo.imagen} alt={anillo.nombre} />
@@ -69,6 +83,7 @@ export default function AnilloClient({ anillo }: { anillo: Anillo }) {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

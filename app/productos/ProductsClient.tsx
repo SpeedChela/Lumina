@@ -95,7 +95,7 @@ export default function ProductsClient({
             </div>
 
             <div className={styles.cardFooter}>
-              <Link href={getProductHref(p)} className={styles.productButton}>
+              <Link href={`${getProductHref(p)}?from=productos`} className={styles.productButton}>
                 Ver producto
               </Link>
             </div>

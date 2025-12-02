@@ -20,9 +20,7 @@ export default async function CollarDetallePage({ params }: { params: { collares
     <>
       <Header showLoginButton={true} />
       <main className="container section">
-        <Link href="/productos/collares" style={{ display: "inline-block", margin: "0 0 2rem", color: "#555", textDecoration: "none" }}>
-          &larr; Volver a todos los collares
-        </Link>
+        {/* Back link handled inside the client component using `?from=` query param */}
         <CollarClient collar={collar} />
       </main>
       <Footer />

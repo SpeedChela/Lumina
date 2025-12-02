@@ -19,9 +19,7 @@ export default async function AnilloDetallePage({ params }: { params: { anillosI
     <>
       <Header showLoginButton={true} />
       <main className="container section">
-        <Link href="/productos/anillos" style={{ display: "inline-block", margin: "0 0 2rem", color: "#555", textDecoration: "none" }}>
-          &larr; Volver a todos los anillos
-        </Link>
+        {/* Back link handled inside the client component using `?from=` query param */}
         <AnilloClient anillo={anillo} />
       </main>
       <Footer />
