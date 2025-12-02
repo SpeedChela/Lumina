@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { anillosData } from "@/data/anillos";
 import styles from "./anillos.module.css";
+import Header from "@/components/Header";
 
 export default function AnillosListadoPage() {
   return (
+    <>
+    {/* Agregamos el Header aquí */}
+			<Header showLoginButton={true}/>
     <main className="container section">
       <div style={{ marginBottom: 12 }}>
         <Link href="/" className={styles.backBtn}>&larr; Volver al inicio</Link>
@@ -31,5 +35,6 @@ export default function AnillosListadoPage() {
         ))}
       </div>
     </main>
+    </>
   );
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./pulseras.module.css";
+import Header from "@/components/Header";
 
 type Pulsera = {
   id: string;
@@ -39,6 +40,9 @@ const pulserasData: Pulsera[] = [
 
 export default function PulserasListadoPage() {
   return (
+    <>
+    {/* Agregamos el Header aquí */}
+			<Header showLoginButton={true}/><hr />
     <main className="container section">
       <div style={{ marginBottom: 12 }}>
         <Link href="/" className={styles.backBtn}>&larr; Volver al inicio</Link>
@@ -71,5 +75,6 @@ export default function PulserasListadoPage() {
         ))}
       </div>
     </main>
+    </>
   );
 }
