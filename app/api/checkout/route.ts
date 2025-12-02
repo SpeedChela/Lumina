@@ -41,7 +41,10 @@ export async function POST(req: Request) {
       payment_method_types: ["card"],
       line_items,
       mode: "payment",
-      success_url: `${origin}/pago?session_id={CHECKOUT_SESSION_ID}`,
+      // Redirect directly to the confirmation page so we don't show the intermediate
+      // internal payment form (`/pago`). The confirmation page will verify the
+      // session and display order details.
+      success_url: `${origin}/pago/realizado?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/carrito`,
     });
 

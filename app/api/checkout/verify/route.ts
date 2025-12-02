@@ -14,11 +14,30 @@ export async function GET(req: Request) {
       return NextResponse.json({ ok: true, paid: true });
     }
 
-    const stripe = new Stripe(secret);
+    const stripe = new Stripe(secret, { apiVersion: "2022-11-15" });
     const session = await stripe.checkout.sessions.retrieve(session_id as string);
     // payment_status can be 'paid' when completed
     const paid = (session.payment_status === "paid") || (session.status === "complete");
-    return NextResponse.json({ ok: true, paid });
+
+    // Try to fetch line items for more detailed summary
+    let items: any[] = [];
+    try {
+      const list = await stripe.checkout.sessions.listLineItems(session_id as string, { limit: 100 });
+      items = list.data.map(li => ({ description: li.description, quantity: li.quantity, amount_total: li.amount_total, price: li.price?.unit_amount, currency: li.currency }));
+    } catch (err) {
+      // ignore line items errors
+    }
+
+    const details = {
+      id: session.id,
+      paid,
+      amount_total: session.amount_total,
+      currency: session.currency,
+      customer_details: session.customer_details ?? null,
+      items,
+    };
+
+    return NextResponse.json({ ok: true, ...details });
   } catch (e: any) {
     return NextResponse.json({ ok: false, message: e?.message ?? "Error verifying session" }, { status: 500 });
   }
