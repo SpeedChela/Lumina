@@ -147,7 +147,9 @@ export default function Header({ showLoginButton = true, variant = "public", hid
                 {user && (
                   <>
                     <li className="navGreeting">
-                      Hola, {user.displayName ?? user.email ?? user.uid}
+                      <Link href="/perfil" style={{ textDecoration: "none", color: "inherit" }}>
+                        Hola, {user.displayName ?? user.email ?? user.uid}
+                      </Link>
                     </li>
                     <li>
                       <button

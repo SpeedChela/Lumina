@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./nosotros.module.css";
 import Link from "next/link";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 export default function Nosotros() {
     return (
@@ -78,6 +79,8 @@ export default function Nosotros() {
                     </p>
                 </div>
             </section>
+
+            <Footer />
         </>
     );
 }

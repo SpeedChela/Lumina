@@ -63,7 +63,6 @@ export default function LoginPage() {
     setError(null);
     try {
       const provider = new GoogleAuthProvider();
-      // Force account selection prompt so user can choose which Google account to use
       provider.setCustomParameters({ prompt: "select_account" });
       const result = await signInWithPopup(auth, provider);
       const idToken = await result.user.getIdToken();
@@ -73,7 +72,6 @@ export default function LoginPage() {
         body: JSON.stringify({ idToken, remember: true }),
       });
       if (res.ok) {
-        // Verificar si es admin
         const adminEmails = ["pruebaadmin@lumina.com","renatogn62@gmail.com"];
         if (adminEmails.includes(result.user.email || "")) {
           router.push("/dashboard");
@@ -83,12 +81,10 @@ export default function LoginPage() {
       } else {
         setError("Error al crear sesión con Google.");
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error("Google login error:", err);
-      // If the popup was closed by the user, don't show an error message.
-      const code = (err as any)?.code;
-      if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") {
-        // user cancelled the popup - silently abort
+      const errorCode = (err as { code?: string })?.code;
+      if (errorCode === "auth/popup-closed-by-user" || errorCode === "auth/cancelled-popup-request") {
         return;
       }
       setError("Error al iniciar sesión con Google.");
