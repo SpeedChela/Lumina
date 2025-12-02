@@ -70,11 +70,18 @@ export default function UsersClient() {
         {/* Mantenemos el link de "Volver" con el color de marca */}
         <div className="mt-4">
           <Link
-            href="/dashboard"
-            style={{ color: "var(--brand)", textDecoration: "none", fontSize: "0.9rem" }}
-          >
-            ← Volver al dashboard
-          </Link>
+                href="/dashboard"
+                style={{ 
+                    color: 'var(--brand--600)', 
+                    textDecoration: 'none', 
+                    fontWeight: 600,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem'
+                }}
+            >
+             ← Volver al dashboard
+            </Link>
         </div>
       </section>
 
