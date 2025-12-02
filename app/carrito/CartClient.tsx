@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from "react";
 import { useCart } from "../context/CartContext";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function currency(n: number) {
   return `$${n.toLocaleString("es-AR")}`;
@@ -10,6 +11,7 @@ function currency(n: number) {
 
 export default function CartClient() {
   const { items, updateQty, removeItem, clear, subtotal } = useCart();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const shipping = useMemo(() => (subtotal > 0 ? 200 : 0), [subtotal]);
@@ -39,9 +41,8 @@ export default function CartClient() {
         window.location.href = data.url;
         return;
       }
-      // fallback: clear cart and show a confirmation
-      clear();
-      alert(data?.message ?? "Pago simulado: compra realizada");
+      // Stripe not configured: redirect to internal payment page
+      router.push("/pago");
     } catch (e) {
       console.error(e);
       alert("Error al procesar pago");

@@ -1,10 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useCart } from "../context/CartContext";
+import { useSearchParams } from "next/navigation";
 
 export default function PagoPage() {
   const router = useRouter();
@@ -56,6 +57,8 @@ export default function PagoPage() {
     setLoading(true);
     try {
       await new Promise(r => setTimeout(r, 1000));
+      // Simulated payment succeeded — clear local cart and go to result page
+      try { clear(); } catch {}
       router.push("/pago/realizado");
     } catch {
       setError("Error procesando el pago.");
@@ -63,6 +66,32 @@ export default function PagoPage() {
       setLoading(false);
     }
   }
+
+  // If Stripe redirects back with a session_id, verify it and clear cart
+  const search = useSearchParams();
+  useEffect(() => {
+    const sessionId = search?.get("session_id");
+    if (!sessionId) return;
+    let mounted = true;
+    (async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/checkout/verify?session_id=${encodeURIComponent(sessionId)}`);
+        const data = await res.json();
+        if (data?.ok && data?.paid) {
+          try { clear(); } catch {}
+          if (mounted) router.push("/pago/realizado");
+        } else {
+          setError("Pago no confirmado.");
+        }
+      } catch (err) {
+        setError("Error verificando el pago.");
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    })();
+    return () => { mounted = false; };
+  }, [search]);
 
   const total = subtotal || 16000;
 

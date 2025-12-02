@@ -17,7 +17,10 @@ export async function POST(req: Request) {
     }
 
     const origin = req.headers.get("origin") || process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-    const stripe = new Stripe(secret, { apiVersion: "2023-11-15" });
+    // Do not force an API version here — let the installed Stripe library
+    // use its default version. Forcing an unsupported version caused
+    // `Invalid Stripe API version` errors in some environments.
+    const stripe = new Stripe(secret);
 
     const line_items = cart.map((it: any) => {
       const unitPrice = Math.round((Number(it.price ?? it.precio) || 0) * 100);
