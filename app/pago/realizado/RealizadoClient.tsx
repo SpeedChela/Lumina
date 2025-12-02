@@ -31,9 +31,10 @@ export default function RealizadoClient() {
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<VerifyData | null>(null);
 
+  const sessionId = search?.get("session_id");
+  const mode = search?.get("mode");
+
   useEffect(() => {
-    const sessionId = search?.get("session_id");
-    const mode = search?.get("mode");
     if (!sessionId && !mode) return;
     let mounted = true;
     (async () => {
@@ -59,7 +60,7 @@ export default function RealizadoClient() {
       }
     })();
     return () => { mounted = false; };
-  }, [search, clear]);
+  }, [sessionId, mode, clear]);
 
   return (
     <div className="bg-white/80 border border-[#e7ddc9] rounded-2xl p-8 shadow-sm text-center">

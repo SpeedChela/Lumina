@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState, useCallback } from "react";
 
 export type CartItem = {
   id: string;
@@ -201,10 +201,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [items]);
 
-  const sameVariant = (a: AddItemInput | CartItem, b: AddItemInput | CartItem) =>
-    a.id === b.id && a.color === b.color && a.size === b.size;
+  const sameVariant = useCallback(
+    (a: AddItemInput | CartItem, b: AddItemInput | CartItem) =>
+      a.id === b.id && a.color === b.color && a.size === b.size,
+    []
+  );
 
-  const addItem = (item: AddItemInput, qty = 1) =>
+  const addItem = useCallback((item: AddItemInput, qty = 1) =>
     setItems((prev) => {
       const i = prev.findIndex((p) => sameVariant(p, item));
       if (i >= 0) {
@@ -213,32 +216,36 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         return copy;
       }
       return [...prev, { ...item, qty }];
-    });
+    }), [sameVariant]
+  );
 
-  const removeItem = (id: string, opts?: { color?: string; size?: string }) =>
+  const removeItem = useCallback((id: string, opts?: { color?: string; size?: string }) =>
     setItems((prev) =>
       prev.filter((p) => !(p.id === id && p.color === opts?.color && p.size === opts?.size))
-    );
+    ), []
+  );
 
-  const updateQty = (id: string, qty: number, opts?: { color?: string; size?: string }) =>
+  const updateQty = useCallback((id: string, qty: number, opts?: { color?: string; size?: string }) =>
     setItems((prev) =>
       prev.map((p) =>
         p.id === id && p.color === opts?.color && p.size === opts?.size
           ? { ...p, qty: Math.max(1, qty) }
           : p
       )
-    );
+    ), []
+  );
 
-  const clear = () => setItems([]);
+  const clear = useCallback(() => setItems([]), []);
 
   const count = useMemo(() => items.reduce((a, i) => a + i.qty, 0), [items]);
   const subtotal = useMemo(() => items.reduce((a, i) => a + i.qty * i.price, 0), [items]);
 
-  return (
-    <CartContext.Provider value={{ items, addItem, removeItem, updateQty, clear, count, subtotal }}>
-      {children}
-    </CartContext.Provider>
+  const value = useMemo(
+    () => ({ items, addItem, removeItem, updateQty, clear, count, subtotal }),
+    [items, addItem, removeItem, updateQty, clear, count, subtotal]
   );
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
 export function useCart() {
