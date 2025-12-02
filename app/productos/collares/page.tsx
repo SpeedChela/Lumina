@@ -1,10 +1,14 @@
 import Link from "next/link";
 import { collaresData } from "@/data/collares";
 import styles from "./collares.module.css";
+import Header from "@/components/Header";
 // Usar enlace directo a la página principal en lugar del botón dependiente del referrer
 
 export default function CollaresListadoPage() {
   return (
+    <>
+    {/* Agregamos el Header aquí */}
+			<Header showLoginButton={true}/><hr />
     <main className="container section">
       <div style={{ marginBottom: 12 }}>
         <Link href="/" className={styles.backBtn}>&larr; Volver al inicio</Link>
@@ -32,5 +36,6 @@ export default function CollaresListadoPage() {
         ))}
       </div>
     </main>
+    </>
   );
 }
