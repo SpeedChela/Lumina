@@ -21,6 +21,7 @@ function getProductHref(p: Product) {
   const cat = (p.categoria || "").toLowerCase();
   if (cat.includes("anill")) return `/productos/anillos/${encodeURIComponent(p.id)}`;
   if (cat.includes("collar")) return `/productos/collares/${encodeURIComponent(p.id)}`;
+  if (cat.includes("pulser")) return `/productos/pulseras/${encodeURIComponent(p.id)}`;
   return `/productos/${encodeURIComponent(p.id)}`;
 }
 
