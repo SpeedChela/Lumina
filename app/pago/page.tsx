@@ -9,7 +9,7 @@ import { useSearchParams } from "next/navigation";
 
 export default function PagoPage() {
   const router = useRouter();
-  const { subtotal } = useCart();
+  const { subtotal, clear } = useCart();
   const [holder, setHolder] = useState("");
   const [card, setCard] = useState("");
   const [expMonth, setExpMonth] = useState("");
@@ -57,9 +57,9 @@ export default function PagoPage() {
     setLoading(true);
     try {
       await new Promise(r => setTimeout(r, 1000));
-      // Simulated payment succeeded — clear local cart and go to result page
+      // Simulated payment succeeded — clear local cart and go to result page (demo mode)
       try { clear(); } catch {}
-      router.push("/pago/realizado");
+      router.push("/pago/realizado?mode=demo");
     } catch {
       setError("Error procesando el pago.");
     } finally {
@@ -80,7 +80,7 @@ export default function PagoPage() {
         const data = await res.json();
         if (data?.ok && data?.paid) {
           try { clear(); } catch {}
-          if (mounted) router.push("/pago/realizado");
+          if (mounted) router.push(`/pago/realizado?session_id=${encodeURIComponent(sessionId)}`);
         } else {
           setError("Pago no confirmado.");
         }
